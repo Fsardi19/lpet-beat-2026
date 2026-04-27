@@ -9,15 +9,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --accent: #C41E5C;
-    --accent-soft: #E11D48;
-    --ink: #1a1a1a;
-    --ink-soft: #2C2D2E;
-    --paper: #FFFFFF;
-    --paper-soft: #F6F6F6;
-    --line: #E0E6F4;
-    --gold: #B89060;
-    --gold-soft: #D4B07A;
+    /* LP&ET official brand tokens (extracted from live Shopify theme) */
+    --accent: #E11D48;            /* rose/crimson — LP&ET primary accent */
+    --accent-deep: #C41E5C;       /* deeper rose for emphasis */
+    --ink: #2C2D2E;               /* primary text — LP&ET foreground */
+    --ink-deep: #1a1a1a;          /* darkest text */
+    --paper: #FCF8EC;             /* warm cream — LP&ET primary bg */
+    --paper-warm: #F5F0E0;        /* deeper cream — section alternation */
+    --paper-pure: #FFFFFF;        /* pure white for cards */
+    --paper-card: #F5F5F5;        /* card backgrounds */
+    --paper-soft: #F6F6F6;        /* footer / cool gray when needed */
+    --line: #E0E6F4;              /* borders */
+    --line-soft: #D8DCE5;         /* input borders */
+    --gold-warm: #FFAA47;         /* LP&ET stars / warm highlights */
+    --gold: #B89060;              /* deeper gold for Wall of Fame heading */
+    --gold-soft: #D4B07A;         /* gold accent / borders */
+    --radius: 6px;                /* LP&ET button radius */
     --serif: 'Tenor Sans', Georgia, serif;
     --sans: 'Jost', -apple-system, sans-serif;
   }
@@ -25,10 +32,11 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: var(--sans);
-    color: var(--ink-soft);
+    color: var(--ink);
     background: var(--paper);
     line-height: 1.6;
     font-weight: 300;
+    font-size: 0.94rem;
   }
   h1, h2, h3, .serif { font-family: var(--serif); font-weight: 400; letter-spacing: 0.01em; }
 
@@ -110,13 +118,14 @@
     font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
     text-decoration: none; cursor: pointer;
     border: 1px solid currentColor;
+    border-radius: var(--radius);
     transition: all 0.3s ease;
     font-weight: 400;
   }
   .btn-primary {
     background: var(--accent); color: white; border-color: var(--accent);
   }
-  .btn-primary:hover { background: transparent; color: white; }
+  .btn-primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: white; }
   .btn-ghost { color: white; }
   .btn-ghost:hover { background: white; color: var(--ink); }
 
@@ -145,7 +154,7 @@
   }
 
   /* ============ WHY EXISTS ============ */
-  .why { background: var(--paper-soft); }
+  .why { background: var(--paper-warm); }
   .why .container { max-width: 880px; }
   .why-stat-row {
     display: grid; grid-template-columns: repeat(3, 1fr);
@@ -221,7 +230,7 @@
   }
 
   /* ============ RUBRIC ============ */
-  .rubric { background: var(--paper-soft); }
+  .rubric { background: var(--paper-warm); }
   .rubric-grid {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 64px;
@@ -241,7 +250,8 @@
   .rubric-name { font-size: 18px; color: var(--ink); margin-bottom: 4px; }
   .rubric-desc { font-size: 14px; opacity: 0.75; }
   .rubric-aside {
-    background: white; padding: 40px; border: 1px solid var(--line);
+    background: var(--paper); padding: 40px; border: 1px solid var(--line);
+    border-radius: var(--radius);
   }
   .rubric-aside h4 {
     font-family: var(--serif); font-size: 22px;
@@ -390,7 +400,7 @@
 
   /* ============ FOUNDER LETTER ============ */
   .founder {
-    background: var(--paper-soft);
+    background: var(--paper-warm);
   }
   .founder-grid {
     display: grid; grid-template-columns: 1fr 1fr;
@@ -405,7 +415,7 @@
   .founder-text p {
     font-size: 17px; line-height: 1.7;
     margin-bottom: 24px;
-    color: var(--ink-soft);
+    color: var(--ink);
   }
   .founder-sig {
     margin-top: 40px;
@@ -548,13 +558,13 @@
 
     <div style="margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--line); max-width: 720px;">
       <h3 style="font-family: var(--serif); font-size: 28px; line-height: 1.25; margin-bottom: 24px; color: var(--ink); font-weight: 400;">A thank-you note, written in green coffee.</h3>
-      <p style="font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 18px;">BEAT exists because the specialty coffee industry took a chance on us when we were a young finca with one ferment tank, no auction record, and a Sidra varietal nobody outside Cundinamarca had heard of.</p>
-      <p style="font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 18px;">The roasters who paid us a fair price for our first lots. The baristas who put our coffees on their competition cards. The importers who said yes before we had a website. They built this farm with us — and to them, this is our most direct way of saying <em>thank you</em>.</p>
-      <p style="font-size: 17px; line-height: 1.7; color: var(--ink-soft);">BEAT is how we pay it forward to the next generation of competitors who haven't yet won a regional, who won't be bidding at auction, but who deserve a coffee good enough to take to a final.</p>
+      <p style="font-size: 17px; line-height: 1.7; color: var(--ink); margin-bottom: 18px;">BEAT exists because the specialty coffee industry took a chance on us when we were a young finca with one ferment tank, no auction record, and a Sidra varietal nobody outside Cundinamarca had heard of.</p>
+      <p style="font-size: 17px; line-height: 1.7; color: var(--ink); margin-bottom: 18px;">The roasters who paid us a fair price for our first lots. The baristas who put our coffees on their competition cards. The importers who said yes before we had a website. They built this farm with us — and to them, this is our most direct way of saying <em>thank you</em>.</p>
+      <p style="font-size: 17px; line-height: 1.7; color: var(--ink);">BEAT is how we pay it forward to the next generation of competitors who haven't yet won a regional, who won't be bidding at auction, but who deserve a coffee good enough to take to a final.</p>
       <p style="font-size: 22px; line-height: 1.4; color: var(--ink); font-family: var(--serif); margin-top: 36px; font-style: italic;">20 boxes. 6 kilos each. No bidding war. Just craft.</p>
     </div>
 
-    <p style="margin-top: 56px; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; color: var(--ink-soft); line-height: 1.7;">
+    <p style="margin-top: 56px; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; color: var(--ink); line-height: 1.7;">
       Sources: Perfect Daily Grind: <em>Is the WBC too expensive?</em> (Jan 2023) · Coffee Intelligence: <em>Why coffee competitions are losing appeal</em> (Jul 2024) · The Pourover: <em>The Cost of Competing</em> · Lux Cafe Club: <em>Hidden Costs of the WBC</em>
     </p>
   </div>
