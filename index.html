@@ -305,6 +305,70 @@
     font-size: 14px; opacity: 0.75;
   }
 
+  /* ============ COMPETITIONS CALENDAR ============ */
+  .calendar { background: var(--paper); }
+  .calendar .container { max-width: 1180px; }
+  .calendar-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; margin-top: 56px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .cal-event {
+    background: var(--paper);
+    padding: 32px 28px;
+    transition: background 0.25s;
+    position: relative;
+  }
+  .cal-event:hover { background: var(--paper-warm); }
+  .cal-event.highlight {
+    background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper) 100%);
+  }
+  .cal-event.highlight::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%; background: var(--accent);
+  }
+  .cal-date {
+    font-family: var(--serif);
+    color: var(--accent);
+    font-size: 14px; letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    display: flex; align-items: baseline; gap: 6px;
+    flex-wrap: wrap;
+  }
+  .cal-date .cal-month { font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; }
+  .cal-date .cal-day { font-size: 22px; color: var(--ink-deep); font-weight: 400; }
+  .cal-date .cal-year { color: var(--ink); opacity: 0.5; font-size: 12px; letter-spacing: 0.15em; }
+  .cal-name {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 19px; line-height: 1.2;
+    color: var(--ink-deep);
+    margin-bottom: 6px;
+  }
+  .cal-where {
+    font-size: 13px; opacity: 0.7;
+    margin-bottom: 10px;
+  }
+  .cal-note {
+    font-size: 12px; line-height: 1.5;
+    color: var(--ink); opacity: 0.6;
+    font-style: italic;
+  }
+  .cal-note strong { color: var(--accent); font-style: normal; opacity: 1; }
+  .calendar-nationals {
+    margin-top: 56px; padding: 32px;
+    background: var(--paper-warm); border-radius: var(--radius);
+    text-align: center;
+  }
+  .cal-eyebrow-secondary {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px; font-weight: 500;
+  }
+  .calendar-nationals p {
+    font-size: 15px; line-height: 1.7; max-width: 720px; margin: 0 auto;
+    opacity: 0.85;
+  }
+
   /* ============ RUBRIC ============ */
   .rubric { background: var(--paper-warm); }
   .rubric-grid {
@@ -674,6 +738,23 @@
     text-align: center;
     padding: 140px 48px;
   }
+  .cta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; max-width: 760px; margin: 48px auto;
+    text-align: left;
+  }
+  .cta-cell {
+    padding: 28px 24px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+  }
+  .cta-cell-eyebrow {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent-soft); margin-bottom: 10px; font-weight: 500;
+  }
+  .cta-cell p { font-size: 14px; line-height: 1.65; opacity: 0.85; margin: 0; }
+  .cta-cell strong { color: white; }
   .final-cta h2 { color: white; max-width: 720px; margin: 0 auto 24px; }
   .final-cta p { font-size: 19px; opacity: 0.8; max-width: 560px; margin: 0 auto 48px; }
   .final-cta .deadline {
@@ -731,6 +812,13 @@
     .step:last-child { border-bottom: none; }
     .step h3 { font-size: 20px; }
 
+    /* CALENDAR */
+    .calendar-grid { grid-template-columns: 1fr; }
+    .cal-event { padding: 24px 20px; }
+    .cal-name { font-size: 17px; }
+    .calendar-nationals { padding: 24px; margin-top: 40px; }
+    .calendar-nationals p { font-size: 14px; }
+
     /* RUBRIC */
     .rubric-grid { grid-template-columns: 1fr; gap: 32px; }
     .rubric-list .rubric-item { grid-template-columns: 60px 1fr; gap: 16px; padding: 18px 0; }
@@ -772,8 +860,10 @@
 
     /* FINAL CTA */
     .final-cta { padding: 80px 20px; }
-    .final-cta p { font-size: 16px; margin-bottom: 32px; }
+    .final-cta p { font-size: 16px; margin-bottom: 24px; }
     .final-cta .deadline { font-size: 10px; letter-spacing: 0.3em; padding: 0 12px; }
+    .cta-grid { grid-template-columns: 1fr; gap: 14px; margin: 32px auto; }
+    .cta-cell { padding: 22px 20px; }
 
     /* FOOTER */
     .footer { padding: 32px 20px; font-size: 10px; letter-spacing: 0.1em; line-height: 1.7; }
@@ -835,6 +925,7 @@
   <div class="nav-links">
     <a href="#why">Why</a>
     <a href="#how">How it works</a>
+    <a href="#calendar">Calendar</a>
     <a href="#rubric">The rubric</a>
     <a href="#champions">Champions</a>
     <a href="#apply" class="btn-link">Apply</a>
@@ -846,7 +937,7 @@
   <div class="hero-content">
     <div class="hero-eyebrow">BEAT 2026 — Edition III</div>
     <h1>Behind every routine,<br/>a shared heartbeat.</h1>
-    <p class="hero-sub">20 boxes. 20 competitors. 6 kilos each — green, single-origin, traceable to the lot. Apply with a 2-minute video by August 31, 2026.</p>
+    <p class="hero-sub">20 boxes. 20 competitors. <strong>Sized for your category</strong> — 6 kg for filter, up to 12.5 kg for espresso. Green, single-origin, traceable to the lot. Apply with a 2-minute video by August 31, 2026.</p>
     <div class="hero-cta-group">
       <a href="#apply" class="btn btn-primary">Submit your video</a>
       <a href="#rubric" class="btn btn-ghost">See the rubric</a>
@@ -945,12 +1036,65 @@
       </div>
       <div class="step">
         <h3>Get the box</h3>
-        <p>20 selected competitors receive a 6 kg BEAT lot — variety, protocol and producer story sheet included.</p>
+        <p>20 selected competitors receive a BEAT lot sized for their category — 6 kg for filter, up to 12.5 kg for espresso. Variety, protocol, and producer story sheet included.</p>
       </div>
       <div class="step">
         <h3>Compete</h3>
-        <p>Direct line to our processing team for technical Q&amp;A. We amplify your story across our channels.</p>
+        <p>Direct line to our processing team for technical Q&amp;A. We share your story across our channels through your training cycle.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIONS CALENDAR -->
+<section class="calendar" id="calendar">
+  <div class="container">
+    <div class="section-eyebrow">Competitions BEAT supports</div>
+    <h2 class="section-title">Tell us where you're competing.<br/>We'll deliver in time.</h2>
+    <p class="section-lede">When you apply, mark the competition you're preparing for. We'll size your lot and arrange shipping so it lands before your training cycle starts.</p>
+
+    <div class="calendar-grid">
+      <article class="cal-event">
+        <div class="cal-date"><span class="cal-month">Oct</span> <span class="cal-day">14–17</span> <span class="cal-year">2026</span></div>
+        <h3 class="cal-name">SCAJ World Specialty Coffee</h3>
+        <div class="cal-where">Tokyo, Japan</div>
+        <div class="cal-note">Asian finals · key for visibility in Japan and Korea</div>
+      </article>
+      <article class="cal-event">
+        <div class="cal-date"><span class="cal-month">Oct</span> <span class="cal-day">23–25</span> <span class="cal-year">2026</span></div>
+        <h3 class="cal-name">World of Coffee Panama</h3>
+        <div class="cal-where">Panama City, Panama</div>
+        <div class="cal-note">Central American finals · regional springboard</div>
+      </article>
+      <article class="cal-event">
+        <div class="cal-date"><span class="cal-month">Nov</span> <span class="cal-day">·</span> <span class="cal-year">2026</span></div>
+        <h3 class="cal-name">Café de Colombia Expo</h3>
+        <div class="cal-where">Bogotá, Colombia</div>
+        <div class="cal-note">Home turf · the loudest crowd in the room</div>
+      </article>
+      <article class="cal-event">
+        <div class="cal-date"><span class="cal-month">Jan</span> <span class="cal-day">28–29</span> <span class="cal-year">2027</span></div>
+        <h3 class="cal-name">World of Coffee Dubai</h3>
+        <div class="cal-where">Dubai, UAE</div>
+        <div class="cal-note">Middle East hub · the premium specialty market</div>
+      </article>
+      <article class="cal-event">
+        <div class="cal-date"><span class="cal-month">Apr</span> <span class="cal-day">9–11</span> <span class="cal-year">2027</span></div>
+        <h3 class="cal-name">World of Coffee New Orleans</h3>
+        <div class="cal-where">New Orleans, USA</div>
+        <div class="cal-note">Includes the World Coffee Roasting Championship</div>
+      </article>
+      <article class="cal-event highlight">
+        <div class="cal-date"><span class="cal-month">Apr–May</span> <span class="cal-day">28 / 1</span> <span class="cal-year">2027</span></div>
+        <h3 class="cal-name">★ World of Coffee Tokyo</h3>
+        <div class="cal-where">Tokyo, Japan</div>
+        <div class="cal-note">Host city of the <strong>World Barista Championship 2027</strong></div>
+      </article>
+    </div>
+
+    <div class="calendar-nationals">
+      <div class="cal-eyebrow-secondary">National & regional qualifiers</div>
+      <p>Many of you will also be competing at home first. We support these too — Hellenic Coffee Championship · Korea Barista Championship · Japan Barista &amp; Brewers Cup · US Brewers Cup &amp; USBC · Italy Barista Championship · and more. <strong>Tell us in your application which one you're targeting.</strong></p>
     </div>
   </div>
 </section>
@@ -1331,9 +1475,21 @@
 <section class="final-cta" id="apply">
   <div class="container">
     <h2 class="section-title">Apply by August 31, 2026.<br/>Hear back in 14 days.</h2>
-    <p>Submissions close at midnight EST. The kit (rubric guide, video brief, brand assets) lands in your inbox the moment you apply.</p>
+    <p>Submissions close at midnight EST. The moment you apply, the BEAT Welcome Kit lands in your inbox — a complete PDF with the rubric, the video brief, brand assets you can use in your routine, and a private Q&amp;A line to our processing team.</p>
+
+    <div class="cta-grid">
+      <div class="cta-cell">
+        <div class="cta-cell-eyebrow">If you're selected</div>
+        <p>You receive your BEAT lot sized to your category, plus weekly content support — we share your training story across LP&amp;ET channels through your competition cycle.</p>
+      </div>
+      <div class="cta-cell">
+        <div class="cta-cell-eyebrow">If you're not</div>
+        <p>You're invited to become a <strong>BEAT Ambassador</strong> in your country — help organize a local cupping with our team and stay in the network for the next edition.</p>
+      </div>
+    </div>
+
     <a href="#" class="btn btn-primary">Start your application</a>
-    <div class="deadline">20 boxes · 6 kilos each · No second chances this year</div>
+    <div class="deadline">20 boxes · sized for your category · Apply once</div>
   </div>
 </section>
 
@@ -1406,10 +1562,13 @@
                 <input type="radio" name="category" value="brewers_cup" /> Brewers Cup
               </label>
               <label class="category-option">
-                <input type="radio" name="category" value="aeropress" /> AeroPress
+                <input type="radio" name="category" value="latte_art" /> Latte Art
               </label>
               <label class="category-option">
                 <input type="radio" name="category" value="cigs" /> Coffee in Good Spirits
+              </label>
+              <label class="category-option">
+                <input type="radio" name="category" value="aeropress" /> AeroPress
               </label>
               <label class="category-option">
                 <input type="radio" name="category" value="roaster" /> Roasting
@@ -1418,6 +1577,50 @@
                 <input type="radio" name="category" value="other" /> Other
               </label>
             </fieldset>
+          </div>
+        </div>
+
+        <!-- Target competition -->
+        <div class="form-row single">
+          <div class="form-field">
+            <label for="target_competition">Which competition are you preparing for? <span class="req">*</span></label>
+            <select id="target_competition" name="target_competition" required>
+              <option value="">— Select your target —</option>
+              <optgroup label="World stage">
+                <option value="WBC Tokyo 2027">★ World Barista Championship · Tokyo · April 28 – May 1, 2027</option>
+                <option value="World Brewers Cup Tokyo 2027">World Brewers Cup · Tokyo · April 28 – May 1, 2027</option>
+                <option value="World Coffee Roasting Championship 2027">World Coffee Roasting Championship · New Orleans · April 9–11, 2027</option>
+              </optgroup>
+              <optgroup label="World of Coffee circuit">
+                <option value="SCAJ Tokyo 2026">SCAJ World Specialty Coffee · Tokyo · October 14–17, 2026</option>
+                <option value="WoC Panama 2026">World of Coffee Panama · October 23–25, 2026</option>
+                <option value="WoC Dubai 2027">World of Coffee Dubai · January 28–29, 2027</option>
+                <option value="WoC New Orleans 2027">World of Coffee New Orleans · April 9–11, 2027</option>
+                <option value="WoC Tokyo 2027">World of Coffee Tokyo · April 28 – May 1, 2027</option>
+              </optgroup>
+              <optgroup label="National qualifiers">
+                <option value="USBC 2027">US Barista Championship 2027</option>
+                <option value="US Brewers Cup 2027">US Brewers Cup 2027</option>
+                <option value="Canada Barista 2027">Canadian Barista Championship 2027</option>
+                <option value="Hellenic 2026">Hellenic Coffee Championship 2026</option>
+                <option value="Korea 2026">Korea Barista &amp; Brewers Championship 2026</option>
+                <option value="Japan 2026">Japan Barista &amp; Brewers Cup 2026</option>
+                <option value="Italy 2026">Italy Barista Championship 2026</option>
+                <option value="Colombia 2026">Café de Colombia · Bogotá · November 2026</option>
+                <option value="Other national">Other national / regional competition</option>
+              </optgroup>
+              <option value="Not yet decided">I haven't decided which one yet</option>
+            </select>
+            <span class="help">Pick the one you're aiming for. We'll size and ship your lot to land before your training cycle.</span>
+          </div>
+        </div>
+
+        <!-- National registration status -->
+        <div class="form-row single">
+          <div class="form-field">
+            <label for="national_registration">Are you registered for a national or regional already?</label>
+            <input type="text" id="national_registration" name="national_registration" maxlength="200" placeholder="e.g. Registered for USBC 2027 — or leave blank if first-timer" />
+            <span class="help">Optional. First-timers welcome. If you're already registered for a national, drop a quick note.</span>
           </div>
         </div>
 
@@ -1604,13 +1807,16 @@
     const email = document.getElementById('email').value.trim().toLowerCase();
     const country = document.getElementById('country').value.trim();
     const cat = getSelectedCategory();
+    const targetComp = document.getElementById('target_competition').value;
+    const nationalReg = document.getElementById('national_registration').value.trim();
     const videoUrl = document.getElementById('video_url').value.trim();
     const pitch = document.getElementById('pitch_text').value.trim();
 
     if (!fullName) { showError('Please enter your full name.'); return; }
     if (!/^\S+@\S+\.\S+$/.test(email)) { showError('Please enter a valid email address.'); return; }
     if (!country) { showError('Please enter your country.'); return; }
-    if (!cat) { showError('Please select a category (Barista, Brewers Cup, AeroPress, etc.).'); return; }
+    if (!cat) { showError('Please select a category (Barista, Brewers Cup, Latte Art, etc.).'); return; }
+    if (!targetComp) { showError('Please pick the competition you\'re preparing for. Use "I haven\'t decided" if unsure.'); return; }
     if (!/^https?:\/\/[^\s]+\.[^\s]+/.test(videoUrl)) {
       showError('Please paste a real video URL (e.g. https://youtube.com/...). Make sure it includes a domain.');
       return;
@@ -1635,6 +1841,8 @@
       instagram_handle: nullable(document.getElementById('instagram_handle').value),
       tiktok_handle: nullable(document.getElementById('tiktok_handle').value),
       category: cat,
+      target_competition: targetComp,
+      national_registration: nationalReg || null,
       video_url: videoUrl,
       pitch_text: pitch,
       current_roastery: nullable(document.getElementById('current_roastery').value),
