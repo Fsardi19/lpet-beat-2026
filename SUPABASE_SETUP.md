@@ -1,8 +1,12 @@
 # BEAT 2026 — Supabase Connection Setup
 
-This guide walks through wiring the BEAT submission form to your existing **LP&ET CraftLab Supabase project** (`iqvmilaakjfuaacijtip`). No new project required.
+This guide walks through wiring the BEAT submission form to a Supabase project.
 
-> ⚠️ Felipe runs other Supabase projects from separate terminals/MCPs. The steps below are designed to be **non-destructive** — they only add ONE new table (`beat_submissions_2026`) to the CraftLab project. Nothing existing is modified.
+> ⚠️ **Project choice not yet decided.** Felipe runs 3 Supabase projects from separate terminals/MCPs. Replace `[YOUR_PROJECT_REF]` everywhere below with the chosen project ref BEFORE running anything.
+>
+> The migration is additive — only adds ONE new table (`beat_submissions_2026`) plus indexes/policies/view. Nothing existing is touched.
+>
+> **Recommendation:** dedicate a marketing-only Supabase project to BEAT. Don't mix marketing form data with the CraftLab product database — different lifecycles, different scaling profiles, different access patterns.
 
 ---
 
@@ -18,11 +22,11 @@ You can run it any of three ways:
 
 ### Option A: Supabase MCP (your other terminal)
 ```
-Run /Users/felipesardi/Desktop/DOCS CAFE TOSTADO/AI STRATEGY/lpet-marketing-hub/referencias/proyectos/landing-beat-2026/migrations/001_beat_submissions.sql against project iqvmilaakjfuaacijtip
+Run /Users/felipesardi/Desktop/DOCS CAFE TOSTADO/AI STRATEGY/lpet-marketing-hub/referencias/proyectos/landing-beat-2026/migrations/001_beat_submissions.sql against project [YOUR_PROJECT_REF]
 ```
 
 ### Option B: Supabase Dashboard SQL Editor
-1. Open https://supabase.com/dashboard/project/iqvmilaakjfuaacijtip/sql
+1. Open https://supabase.com/dashboard/project/[YOUR_PROJECT_REF]/sql
 2. Paste the contents of `001_beat_submissions.sql`
 3. Click "Run"
 
@@ -46,9 +50,9 @@ Both should return without errors (the first will return zero rows; the second r
 
 ## Step 2 — Get your Supabase URL and anon key
 
-1. Open https://supabase.com/dashboard/project/iqvmilaakjfuaacijtip/settings/api
+1. Open https://supabase.com/dashboard/project/[YOUR_PROJECT_REF]/settings/api
 2. Copy these two values:
-   - **Project URL** (looks like `https://iqvmilaakjfuaacijtip.supabase.co`)
+   - **Project URL** (looks like `https://[YOUR_PROJECT_REF].supabase.co`)
    - **anon / public** API key (the one labeled `anon`, NOT `service_role`)
 
 > The anon key is **public by design**. It's safe to ship in browser JS. The `service_role` key, however, must NEVER be in browser code.
@@ -67,7 +71,7 @@ const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
 Replace with the values from Step 2:
 
 ```javascript
-const SUPABASE_URL = 'https://iqvmilaakjfuaacijtip.supabase.co';
+const SUPABASE_URL = 'https://[YOUR_PROJECT_REF].supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ...';  // your anon key
 ```
 
