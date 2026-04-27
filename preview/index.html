@@ -58,19 +58,30 @@
     overflow: hidden;
   }
   .hero-heartbeat {
-    position: absolute; left: 0; right: 0; bottom: 9vh;
+    position: absolute; left: 0; right: 0; bottom: 6vh;
     display: flex; justify-content: center;
     z-index: 1; pointer-events: none;
   }
+  .hero-heartbeat::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+      rgba(10,10,10,0.6) 0%,
+      rgba(10,10,10,0) 30%,
+      rgba(10,10,10,0) 70%,
+      rgba(10,10,10,0.6) 100%);
+    pointer-events: none;
+  }
   .hero-heartbeat img {
     width: 100%; max-width: 1500px; height: auto; display: block;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
-    mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    opacity: 0.92;
   }
   .hero-content { position: relative; z-index: 2; max-width: 920px; }
   .hero-eyebrow {
     font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase;
-    margin-bottom: 32px; opacity: 0.85;
+    margin-bottom: 32px; opacity: 1; color: #f5f5f5;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.85);
   }
   .hero-eyebrow::before, .hero-eyebrow::after {
     content: '——'; margin: 0 14px; opacity: 0.5;
@@ -80,11 +91,16 @@
     line-height: 1.05;
     margin-bottom: 28px;
     font-weight: 400;
+    color: #ffffff;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.85), 0 0 12px rgba(0,0,0,0.5);
   }
   .hero-sub {
     font-size: clamp(16px, 1.5vw, 19px);
     max-width: 620px; margin: 0 auto 48px;
-    opacity: 0.9; font-weight: 300;
+    opacity: 1;
+    color: #f5f5f5;
+    font-weight: 400;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.85), 0 0 6px rgba(0,0,0,0.6);
   }
   .hero-cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
   .btn {
@@ -497,7 +513,7 @@
     </div>
   </div>
   <div class="hero-heartbeat">
-    <img src="assets/hero-heartbeat.png" alt="" />
+    <img src="assets/hero-heart.png" alt="" />
   </div>
   <div class="hero-footer">
     Trusted on stage at <strong>WBC</strong> · <strong>Brewers Cup</strong> · <strong>COE Finals</strong>
@@ -738,6 +754,22 @@
             <div class="place">Geisha Natural · Kaffa</div>
           </div>
         </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/wof/craig-simon.jpg" alt="Craig Simon Australia Barista Champion WBC Semi-finalist Amsterdam 2018" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">Australia Barista Champion · WBC Amsterdam Semi-finalist</div>
+            <div class="name">Craig Simon</div>
+            <div class="place">Geisha Natural · Veneziano Coffee Roasters</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/sebastian-brewers-stage.jpg" alt="Sebastián Villamizar Colombia at World Brewers Cup Belo Horizonte 2018" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">Colombia at World Brewers Cup · Belo Horizonte</div>
+            <div class="name">Sebastián Villamizar</div>
+            <div class="place">LPET coffee · La Palma &amp; El Tucán team</div>
+          </div>
+        </div>
       </div>
       <div class="wof-year-marker">2018</div>
       <div class="wof-year-empty"></div>
@@ -765,19 +797,29 @@
           </div>
         </div>
         <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/sam-spillman.jpg" alt="Samantha Spillman LA Barista Champion 2019" /></div>
+          <div class="wof-portrait"><img src="assets/wof/sam-spillman.jpg" alt="Samantha Spillman US Barista Champion 2019" /></div>
           <div class="wof-champion-info">
-            <div class="achievement">LA Barista Champion</div>
+            <div class="achievement">★ US Barista Champion</div>
             <div class="name">Samantha Spillman</div>
-            <div class="place">Sidra Lactic · Sunergos Coffee</div>
+            <div class="place">Carbonic Maceration / Lactic Gesha · Dillanos Coffee Roasters</div>
           </div>
         </div>
         <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/sebastian-brewers-stage.jpg" alt="Sylas Semenza US Barista Finalist 2019" /></div>
+          <div class="wof-portrait"><img src="assets/onyx-champions.jpg" alt="Dylan Siemens US Barista Championship Finalist 2019 Onyx Coffee Lab" /></div>
           <div class="wof-champion-info">
-            <div class="achievement">US Barista Finalist</div>
-            <div class="name">Sylas Semenza</div>
-            <div class="place">Sidra Lactic · Rooster Coffee Roasters</div>
+            <div class="achievement">US Barista Championship · Finalist</div>
+            <div class="name">Dylan Siemens</div>
+            <div class="place">Lactic Gesha · <strong>Onyx Coffee Lab</strong></div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
+            <span style="color:var(--gold);font-family:var(--serif);font-size:24px;">TBF</span>
+          </div>
+          <div class="wof-champion-info">
+            <div class="achievement">US Barista Championship · Finalist</div>
+            <div class="name">T. Ben Fischer</div>
+            <div class="place">LPET espresso course · Elixr Coffee Roasters / Glitter Cat</div>
           </div>
         </div>
       </div>
@@ -787,11 +829,19 @@
     <div class="wof-year-block">
       <div class="wof-year-content">
         <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/heroes-recipient.jpg" alt="Heroes Series recipient Australia" /></div>
+          <div class="wof-portrait"><img src="assets/wof/cole-torode-canadian-2018.jpg" alt="Cole Torode Canada Barista Championship Finalist 2020" /></div>
           <div class="wof-champion-info">
-            <div class="achievement">Heroes Series · Recipient</div>
-            <div class="name">Australia</div>
-            <div class="place">SL-28 Heroes Series · Direct trade</div>
+            <div class="achievement">Canada Barista Championship · Finalist</div>
+            <div class="name">Cole Torode</div>
+            <div class="place">Geisha · Swiss Water Decaf · Rosso Coffee Roasters</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/wof/sam-neely.jpg" alt="Sam Neely US Barista Championship Finalist 2020 Amethyst Coffee" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">US Barista Championship · Finalist</div>
+            <div class="name">Sam Neely</div>
+            <div class="place">Geisha · Lactic Process · Amethyst Coffee</div>
           </div>
         </div>
       </div>
@@ -799,20 +849,55 @@
       <div class="wof-year-empty"></div>
     </div>
 
-    <!-- 2025 -->
-    <div class="wof-year-block">
+    <!-- 2021 — 2024 (intentional gap, matches print design) -->
+    <div class="wof-year-block" style="margin-bottom: 56px;">
       <div class="wof-year-empty"></div>
-      <div class="wof-year-marker">2025</div>
+      <div class="wof-year-marker" style="font-size: 22px; font-style: italic; color: #999;">2021 — 2024</div>
       <div class="wof-year-content">
         <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/gray-kauffman-2025.jpg" alt="Gray Kauffman USBC 2025 Semi-finals Seattle" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">US Barista Championship · Semi-finals</div>
-            <div class="name">Gray Kauffman</div>
-            <div class="place">Seattle, WA · 2025</div>
+          <div class="wof-champion-info" style="opacity: 0.7;">
+            <div class="achievement" style="color:#999;">An interlude</div>
+            <div class="name" style="font-style: italic; font-size: 16px;">Quiet years on the podium · loud years on the farm.</div>
+            <div class="place">Pandemic-era competitions paused. We focused on the next harvest.</div>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- 2025 -->
+    <div class="wof-year-block">
+      <div class="wof-year-content">
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/wof/gray-kauffman-2025.jpg" alt="Gray Kauffman US Barista Championship Semi-finalist 2025" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">US Barista Championship · Semi-finalist</div>
+            <div class="name">Gray Kauffman</div>
+            <div class="place">Geisha · Anaerobic · Independent</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
+            <span style="color:var(--gold);font-family:var(--serif);font-size:32px;">SA</span>
+          </div>
+          <div class="wof-champion-info">
+            <div class="achievement">KZN Regional Barista Championship · 1st</div>
+            <div class="name">Fanie Botes</div>
+            <div class="place">South Africa · Pink Bourbon Bio-Washed · Bluebird Coffee Roastery</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
+            <span style="color:var(--gold);font-family:var(--serif);font-size:32px;">SA</span>
+          </div>
+          <div class="wof-champion-info">
+            <div class="achievement">KZN Regional Barista Championship · 2nd</div>
+            <div class="name">Luhle Mnyanda</div>
+            <div class="place">South Africa · Pink Bourbon Bio-Washed · Bluebird Coffee Roastery</div>
+          </div>
+        </div>
+      </div>
+      <div class="wof-year-marker">2025</div>
+      <div class="wof-year-empty"></div>
     </div>
 
   </div>
