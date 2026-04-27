@@ -1360,22 +1360,44 @@
     e.preventDefault();
     errorMsg.classList.remove('show');
 
+    /* ---- Client-side validation ---- */
+    const fullName = document.getElementById('full_name').value.trim();
+    const email = document.getElementById('email').value.trim().toLowerCase();
+    const country = document.getElementById('country').value.trim();
     const cat = document.getElementById('category').value;
-    if (!cat) { showError('Please select a category.'); return; }
+    const videoUrl = document.getElementById('video_url').value.trim();
+    const pitch = document.getElementById('pitch_text').value.trim();
+
+    if (!fullName) { showError('Please enter your full name.'); return; }
+    if (!/^\S+@\S+\.\S+$/.test(email)) { showError('Please enter a valid email address.'); return; }
+    if (!country) { showError('Please enter your country.'); return; }
+    if (!cat) { showError('Please select a category (Barista, Brewers Cup, AeroPress, etc.).'); return; }
+    if (!/^https?:\/\/[^\s]+\.[^\s]+/.test(videoUrl)) {
+      showError('Please paste a real video URL (e.g. https://youtube.com/...). Make sure it includes a domain.');
+      return;
+    }
+    if (pitch.length < 50) {
+      showError('Your pitch needs at least 50 characters. Tell us why this craft matters to you (' + pitch.length + ' / 50 so far).');
+      return;
+    }
+    if (pitch.length > 800) {
+      showError('Pitch is too long. Maximum 800 characters (' + pitch.length + ' currently).');
+      return;
+    }
     if (!document.getElementById('consent_data').checked) {
-      showError('Data consent is required.'); return;
+      showError('Please check the data consent box to submit.'); return;
     }
 
     const payload = {
-      full_name: document.getElementById('full_name').value.trim(),
-      email: document.getElementById('email').value.trim().toLowerCase(),
-      country: document.getElementById('country').value.trim(),
+      full_name: fullName,
+      email: email,
+      country: country,
       city: nullable(document.getElementById('city').value),
       instagram_handle: nullable(document.getElementById('instagram_handle').value),
       tiktok_handle: nullable(document.getElementById('tiktok_handle').value),
       category: cat,
-      video_url: document.getElementById('video_url').value.trim(),
-      pitch_text: document.getElementById('pitch_text').value.trim(),
+      video_url: videoUrl,
+      pitch_text: pitch,
       current_roastery: nullable(document.getElementById('current_roastery').value),
       past_competitions: nullable(document.getElementById('past_competitions').value),
       consent_data: document.getElementById('consent_data').checked,
@@ -1398,7 +1420,8 @@
       successState.classList.add('show');
     } catch (err) {
       console.error('BEAT submission error:', err);
-      showError('Something went wrong. Please try again, or email felipe@lapalmayeltucan.com.');
+      const detail = (err && err.message) ? err.message : (err && err.code ? 'Code: ' + err.code : 'Unknown error');
+      showError('Submission failed — ' + detail + '. If this persists, email felipe@lapalmayeltucan.com.');
       submitBtn.disabled = false; submitBtn.textContent = 'Send application';
     }
   });
