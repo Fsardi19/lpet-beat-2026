@@ -6,7 +6,7 @@ Landing page for the BEAT Series 2026 contest — La Palma & El Tucán's program
 
 ## What is BEAT
 
-For Edition III (2026), LP&ET awards **20 boxes × 6 kg** of green, single-origin specialty coffee to 20 selected barista and brewer competitors worldwide. Selection happens through a public video contest with a transparent jury rubric (30/30/20/20) plus a community voting bonus.
+For its **first edition (2026)**, LP&ET awards **20 boxes** of green, single-origin specialty coffee — sized to each category (6 kg for filter, up to 12.5 kg for espresso) — to 20 selected barista and brewer competitors worldwide. Selection happens through a public video contest with a transparent jury rubric (30/30/20/20) plus a separate Community Choice Award.
 
 ## Live preview
 
