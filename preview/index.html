@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BEAT 2026 — La Palma & El Tucán</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #C41E5C;
+    --accent-soft: #E11D48;
+    --ink: #1a1a1a;
+    --ink-soft: #2C2D2E;
+    --paper: #FFFFFF;
+    --paper-soft: #F6F6F6;
+    --line: #E0E6F4;
+    --gold: #B89060;
+    --gold-soft: #D4B07A;
+    --serif: 'Tenor Sans', Georgia, serif;
+    --sans: 'Jost', -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink-soft);
+    background: var(--paper);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  h1, h2, h3, .serif { font-family: var(--serif); font-weight: 400; letter-spacing: 0.01em; }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 24px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(0,0,0,0); transition: background 0.3s;
+    color: white;
+  }
+  .nav.scrolled { background: rgba(255,255,255,0.96); color: var(--ink); backdrop-filter: blur(8px); }
+  .nav-brand { font-family: var(--serif); font-size: 18px; letter-spacing: 0.15em; }
+  .nav-links { display: flex; gap: 32px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .nav-links a { color: inherit; text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+
+  /* ============ HERO ============ */
+  .hero {
+    height: 100vh; min-height: 760px;
+    position: relative;
+    background: #0A0A0A;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: flex-start;
+    padding: 14vh 24px 80px;
+    color: white; text-align: center;
+    overflow: hidden;
+  }
+  .hero-heartbeat {
+    position: absolute; left: 0; right: 0; bottom: 9vh;
+    display: flex; justify-content: center;
+    z-index: 1; pointer-events: none;
+  }
+  .hero-heartbeat img {
+    width: 100%; max-width: 1500px; height: auto; display: block;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 920px; }
+  .hero-eyebrow {
+    font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase;
+    margin-bottom: 32px; opacity: 0.85;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '——'; margin: 0 14px; opacity: 0.5;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 6.5vw, 84px);
+    line-height: 1.05;
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 1.5vw, 19px);
+    max-width: 620px; margin: 0 auto 48px;
+    opacity: 0.9; font-weight: 300;
+  }
+  .hero-cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 18px 42px;
+    font-family: var(--sans);
+    font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+    border: 1px solid currentColor;
+    transition: all 0.3s ease;
+    font-weight: 400;
+  }
+  .btn-primary {
+    background: var(--accent); color: white; border-color: var(--accent);
+  }
+  .btn-primary:hover { background: transparent; color: white; }
+  .btn-ghost { color: white; }
+  .btn-ghost:hover { background: white; color: var(--ink); }
+
+  .hero-footer {
+    position: absolute; bottom: 32px; left: 0; right: 0; z-index: 2;
+    text-align: center; color: rgba(255,255,255,0.7);
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+  }
+  .hero-footer strong { color: white; font-weight: 500; }
+
+  /* ============ SECTION BASE ============ */
+  section { padding: 120px 48px; }
+  .container { max-width: 1180px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px; font-weight: 500;
+  }
+  .section-title {
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.1; margin-bottom: 24px;
+    color: var(--ink);
+  }
+  .section-lede {
+    font-size: 19px; max-width: 680px;
+    margin-bottom: 64px; opacity: 0.8;
+  }
+
+  /* ============ WHY EXISTS ============ */
+  .why { background: var(--paper-soft); }
+  .why .container { max-width: 880px; }
+  .why-stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px; margin-top: 64px;
+    padding-top: 48px; border-top: 1px solid var(--line);
+  }
+  .why-stat .num {
+    font-family: var(--serif);
+    font-size: 56px; line-height: 1; color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .why-stat .label {
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .why-quote {
+    font-family: var(--serif);
+    font-size: 24px; line-height: 1.5;
+    margin: 48px 0;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .why-quote-author {
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.6; margin-top: 16px;
+    font-family: var(--sans);
+  }
+
+  /* ============ STAGE (background section) ============ */
+  .stage {
+    position: relative;
+    padding: 160px 48px;
+    background: url('assets/wbc-2019-crowd.jpeg') center 30%/cover no-repeat;
+    color: white;
+    text-align: center;
+  }
+  .stage::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.65) 100%);
+  }
+  .stage .container { position: relative; z-index: 2; max-width: 760px; }
+  .stage h2 { color: white; }
+  .stage-sub { font-size: 19px; opacity: 0.9; margin-top: 24px; }
+
+  /* ============ HOW IT WORKS ============ */
+  .how { background: var(--paper); }
+  .steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    counter-reset: step;
+  }
+  .step {
+    padding: 40px 32px 40px 0;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .step:last-child { border-right: none; }
+  .step::before {
+    counter-increment: step;
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--serif);
+    font-size: 14px; color: var(--accent);
+    letter-spacing: 0.2em;
+    display: block; margin-bottom: 20px;
+  }
+  .step h3 {
+    font-size: 22px; margin-bottom: 12px; color: var(--ink);
+  }
+  .step p {
+    font-size: 14px; opacity: 0.75;
+  }
+
+  /* ============ RUBRIC ============ */
+  .rubric { background: var(--paper-soft); }
+  .rubric-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-top: 64px;
+  }
+  .rubric-list .rubric-item {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 24px; align-items: baseline;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .rubric-item:first-child { padding-top: 0; }
+  .rubric-weight {
+    font-family: var(--serif);
+    font-size: 32px; color: var(--accent);
+  }
+  .rubric-name { font-size: 18px; color: var(--ink); margin-bottom: 4px; }
+  .rubric-desc { font-size: 14px; opacity: 0.75; }
+  .rubric-aside {
+    background: white; padding: 40px; border: 1px solid var(--line);
+  }
+  .rubric-aside h4 {
+    font-family: var(--serif); font-size: 22px;
+    margin-bottom: 20px; color: var(--ink);
+  }
+  .rubric-aside p { font-size: 15px; opacity: 0.85; margin-bottom: 16px; }
+  .rubric-aside .signature {
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    opacity: 0.6; margin-top: 24px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ============ WALL OF FAME ============ */
+  .wof {
+    background: linear-gradient(180deg, #FAF8F4 0%, #F2EEE6 100%);
+    padding: 140px 48px;
+  }
+  .wof-header { text-align: center; max-width: 760px; margin: 0 auto 96px; }
+  .wof-title {
+    font-family: var(--serif);
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 400;
+    color: #1a1a1a;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+  }
+  .wof-title .gold {
+    background: linear-gradient(180deg, #B89060 0%, #8B6F45 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+    margin: 0 0.04em;
+  }
+  .wof-tagline {
+    margin-top: 32px;
+    font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+    line-height: 1.7; color: #4a4a4a;
+    max-width: 580px; margin-left: auto; margin-right: auto;
+  }
+  .wof-tagline-es {
+    margin-top: 12px;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    line-height: 1.7; color: #8a8a8a;
+    font-style: italic;
+  }
+  .wof-divider {
+    width: 60px; height: 1px;
+    background: var(--gold);
+    margin: 32px auto;
+  }
+
+  .wof-timeline {
+    max-width: 1100px; margin: 0 auto;
+    position: relative;
+  }
+  .wof-timeline::before {
+    content: ''; position: absolute;
+    left: 50%; top: 60px; bottom: 60px;
+    width: 1px;
+    background: linear-gradient(180deg, transparent 0%, var(--gold-soft) 10%, var(--gold-soft) 90%, transparent 100%);
+    transform: translateX(-50%);
+  }
+
+  .wof-year-block {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 48px; align-items: center;
+    margin-bottom: 80px;
+    position: relative;
+  }
+  .wof-year-block:nth-child(even) .wof-year-content { grid-column: 3; text-align: left; }
+  .wof-year-block:nth-child(even) .wof-year-empty { grid-column: 1; }
+
+  .wof-year-marker {
+    grid-column: 2;
+    font-family: var(--serif);
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--gold);
+    background: #FAF8F4;
+    padding: 12px 24px;
+    z-index: 2;
+    position: relative;
+    line-height: 1;
+  }
+
+  .wof-year-content {
+    grid-column: 1;
+    text-align: right;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .wof-year-block:nth-child(even) .wof-champion-row { flex-direction: row; }
+  .wof-year-block:nth-child(odd) .wof-champion-row { flex-direction: row-reverse; }
+
+  .wof-champion-row {
+    display: flex; align-items: center; gap: 20px;
+    justify-content: flex-end;
+  }
+  .wof-year-block:nth-child(even) .wof-champion-row { justify-content: flex-start; }
+
+  .wof-portrait {
+    flex-shrink: 0;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--gold-soft);
+    box-shadow: 0 4px 24px rgba(184,144,96,0.15);
+    transition: all 0.4s ease;
+  }
+  .wof-portrait:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 32px rgba(184,144,96,0.25);
+  }
+  .wof-portrait img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(15%);
+  }
+
+  .wof-champion-info { max-width: 280px; }
+  .wof-champion-info .name {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: #1a1a1a;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .wof-champion-info .achievement {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .wof-champion-info .place {
+    font-size: 13px; color: #6a6a6a;
+    font-style: italic;
+  }
+
+  .wof-footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid var(--gold-soft);
+    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: #6a6a6a;
+  }
+  .wof-footer .countries { color: var(--gold); font-weight: 500; }
+
+  /* ============ FOUNDER LETTER ============ */
+  .founder {
+    background: var(--paper-soft);
+  }
+  .founder-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .founder-image img {
+    width: 100%; height: 100%; object-fit: cover;
+    aspect-ratio: 4/5;
+    filter: grayscale(15%);
+  }
+  .founder-text h2 { margin-bottom: 32px; }
+  .founder-text p {
+    font-size: 17px; line-height: 1.7;
+    margin-bottom: 24px;
+    color: var(--ink-soft);
+  }
+  .founder-sig {
+    margin-top: 40px;
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+  }
+  .founder-sig small {
+    display: block;
+    font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.6; margin-top: 6px;
+  }
+
+  /* ============ CTA FINAL ============ */
+  .final-cta {
+    background: var(--ink);
+    color: white;
+    text-align: center;
+    padding: 140px 48px;
+  }
+  .final-cta h2 { color: white; max-width: 720px; margin: 0 auto 24px; }
+  .final-cta p { font-size: 19px; opacity: 0.8; max-width: 560px; margin: 0 auto 48px; }
+  .final-cta .deadline {
+    font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
+    opacity: 0.6; margin-top: 32px;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    background: var(--ink); color: rgba(255,255,255,0.6);
+    padding: 48px; text-align: center;
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    .nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .stage { padding: 100px 24px; }
+    .steps { grid-template-columns: 1fr; }
+    .step { border-right: none; border-bottom: 1px solid var(--line); padding: 32px 0; }
+    .step:last-child { border-bottom: none; }
+    .rubric-grid { grid-template-columns: 1fr; gap: 48px; }
+    .champion-grid { grid-template-columns: 1fr; }
+    .founder-grid { grid-template-columns: 1fr; gap: 40px; }
+    .why-stat-row { grid-template-columns: 1fr; gap: 24px; }
+
+    .wof { padding: 80px 24px; }
+    .wof-timeline::before { display: none; }
+    .wof-year-block { grid-template-columns: 1fr; gap: 16px; margin-bottom: 56px; text-align: center !important; }
+    .wof-year-block:nth-child(even) .wof-year-content,
+    .wof-year-block:nth-child(odd) .wof-year-content {
+      grid-column: 1; text-align: center;
+    }
+    .wof-year-marker { grid-column: 1; align-self: center; padding: 8px 16px; font-size: 40px; }
+    .wof-champion-row,
+    .wof-year-block:nth-child(even) .wof-champion-row,
+    .wof-year-block:nth-child(odd) .wof-champion-row {
+      flex-direction: column !important;
+      justify-content: center !important;
+      text-align: center;
+    }
+    .wof-champion-info { text-align: center; max-width: 100%; }
+    .wof-portrait { width: 100px; height: 100px; }
+  }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * { animation: fadeUp 1s ease forwards; opacity: 0; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.6s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.8s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-brand">LP&amp;ET — BEAT</div>
+  <div class="nav-links">
+    <a href="#why">Why</a>
+    <a href="#how">How it works</a>
+    <a href="#rubric">The rubric</a>
+    <a href="#champions">Champions</a>
+    <a href="#apply" class="btn-link">Apply</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">BEAT 2026 — Edition III</div>
+    <h1>Behind every routine,<br/>a shared heartbeat.</h1>
+    <p class="hero-sub">20 boxes. 20 competitors. 6 kilos each — green, single-origin, traceable to the lot. Apply with a 2-minute video by [DEADLINE].</p>
+    <div class="hero-cta-group">
+      <a href="#apply" class="btn btn-primary">Submit your video</a>
+      <a href="#rubric" class="btn btn-ghost">See the rubric</a>
+    </div>
+  </div>
+  <div class="hero-heartbeat">
+    <img src="assets/hero-heartbeat.png" alt="" />
+  </div>
+  <div class="hero-footer">
+    Trusted on stage at <strong>WBC</strong> · <strong>Brewers Cup</strong> · <strong>COE Finals</strong>
+  </div>
+</header>
+
+<!-- WHY EXISTS -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="section-eyebrow">Why BEAT exists</div>
+    <h2 class="section-title">Competing has never been more expensive.<br/>Most producers don't help.</h2>
+    <p class="section-lede">Coffee competitions used to be a barista's craft on display. Today they're an industry — sponsored, scored, and increasingly out of reach. The cost of a single regional barista campaign now averages $8,000 USD before travel. Most producers leave their competitors to figure it out alone.</p>
+
+    <blockquote class="why-quote">
+      "We grew the coffee. We processed it. We roasted it. The least we can do is hand it back to the person who's going to put it on a stage."
+      <div class="why-quote-author">— Felipe Sardi · Co-founder</div>
+    </blockquote>
+
+    <div class="why-stat-row">
+      <div class="why-stat">
+        <div class="num">$8K+</div>
+        <div class="label">Avg cost of a barista campaign 2025</div>
+      </div>
+      <div class="why-stat">
+        <div class="num">14</div>
+        <div class="label">Finals supported by BEAT 2024-25</div>
+      </div>
+      <div class="why-stat">
+        <div class="num">12</div>
+        <div class="label">Countries on BEAT podiums</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORLD STAGE (interlude with WBC photo) -->
+<section class="stage" style="background: url('assets/wbc-2019-crowd.jpeg') center 35%/cover no-repeat;">
+  <div class="container">
+    <div class="section-eyebrow" style="color: rgba(255,255,255,0.7);">Where past BEAT lots have ended up</div>
+    <h2 class="section-title">On stages they grew up watching.</h2>
+    <p class="stage-sub">Boston 2019. Milan 2024. Athens 2025. Every podium starts with someone deciding to apply — and a lot small enough to fit in a 6 kg box.</p>
+  </div>
+</section>
+
+<!-- THE ORIGIN (background section) -->
+<section class="stage" style="background: url('assets/finca-cafetales.jpg') center 60%/cover no-repeat;">
+  <div class="container">
+    <h2 class="section-title">The stage starts<br/>1,700 metres above sea level.</h2>
+    <p class="stage-sub">Before any podium. Before any sponsorship. Before any livestream — the coffee was grown, fermented and roasted by the same hands. Yours next.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">Four steps. No agents.<br/>No producers between you and us.</h2>
+
+    <div class="steps">
+      <div class="step">
+        <h3>Apply</h3>
+        <p>Submit a 2 — 2.5 minute video. Tell us who you are, what you brew, and why it matters.</p>
+      </div>
+      <div class="step">
+        <h3>Get scored</h3>
+        <p>Our jury reviews against a transparent rubric. The community votes. The most-shared get a bonus.</p>
+      </div>
+      <div class="step">
+        <h3>Get the box</h3>
+        <p>20 selected competitors receive a 6 kg BEAT lot — variety, protocol and producer story sheet included.</p>
+      </div>
+      <div class="step">
+        <h3>Compete</h3>
+        <p>Direct line to our processing team for technical Q&amp;A. We amplify your story across our channels.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RUBRIC -->
+<section class="rubric" id="rubric">
+  <div class="container">
+    <div class="section-eyebrow">How we judge</div>
+    <h2 class="section-title">Transparent. Imperfect. Honest.</h2>
+
+    <div class="rubric-grid">
+      <div class="rubric-list">
+        <div class="rubric-item">
+          <div class="rubric-weight">30%</div>
+          <div>
+            <div class="rubric-name">Technical mastery</div>
+            <div class="rubric-desc">Precision, cleanliness, workflow, knowledge of method.</div>
+          </div>
+        </div>
+        <div class="rubric-item">
+          <div class="rubric-weight">30%</div>
+          <div>
+            <div class="rubric-name">Storytelling &amp; the why</div>
+            <div class="rubric-desc">How your craft connects to the values of LP&amp;ET. Sincerity beats polish.</div>
+          </div>
+        </div>
+        <div class="rubric-item">
+          <div class="rubric-weight">20%</div>
+          <div>
+            <div class="rubric-name">Communication quality</div>
+            <div class="rubric-desc">Camera presence. Explaining the technical without losing us.</div>
+          </div>
+        </div>
+        <div class="rubric-item">
+          <div class="rubric-weight">20%</div>
+          <div>
+            <div class="rubric-name">Impact potential</div>
+            <div class="rubric-desc">Creativity, edit, the vibe of your setup.</div>
+          </div>
+        </div>
+        <div class="rubric-item">
+          <div class="rubric-weight">+</div>
+          <div>
+            <div class="rubric-name">Community bonus</div>
+            <div class="rubric-desc">Top 5 most-liked submissions earn additional points.</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="rubric-aside">
+        <h4>What we don't look for</h4>
+        <p>Hyped editing. Flashy gear. Perfect English. A polished elevator pitch you'd give a venture capitalist.</p>
+        <p>We've seen 800 submissions across two editions. The ones we remember had a 5-second moment where the barista forgot the camera and made coffee. Find that moment.</p>
+        <div class="signature">— The BEAT Jury · Edition III</div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- WALL OF FAME (Timeline replica of physical print design) -->
+<section class="wof" id="champions">
+  <div class="wof-header">
+    <h2 class="wof-title">Wall <span class="gold">of</span> Fame</h2>
+    <div class="wof-divider"></div>
+    <p class="wof-tagline">
+      A tribute to the dedication and mastery of those who have carried the spirit of Colombian coffee to the world's most prestigious stages.
+    </p>
+    <p class="wof-tagline-es">
+      Un tributo a la disciplina y al esfuerzo de quienes han honrado el café especial colombiano en competencias alrededor del mundo.
+    </p>
+  </div>
+
+  <div class="wof-timeline">
+
+    <!-- 2016 — 4 champions -->
+    <div class="wof-year-block">
+      <div class="wof-year-content">
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/wof/regina-tay.jpg" alt="Regina Tay Singapore Barista Champion 2016" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">Singapore Barista Champion · WBC Dublin</div>
+            <div class="name">Regina Tay</div>
+            <div class="place">Geisha · Lactic Process · Independent</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait" style="background:#222;"><img src="assets/heroes-brick-2nd-place.jpg" alt="Stefanos Paterakis Greece Barista Champion 2016" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">Greece Barista Champion · WBC Dublin</div>
+            <div class="name">Stefanos Paterakis</div>
+            <div class="place">Sidra · Lactic Process · TAF Coffee</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait" style="background:#222;"><img src="assets/hong-kong-2016.jpg" alt="Dane Oliver Denmark Brewers Cup Champion 2016" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">Denmark Brewers Cup Champion</div>
+            <div class="name">Dane Oliver</div>
+            <div class="place">Geisha · Lactic Honey · La Cabra Coffee Roasters</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait" style="background:#222;"><img src="assets/wof/sam-neely.jpg" alt="Lise Marie Rømo Norway Barista Champion 2016" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">Norway Barista Champion · WBC Dublin</div>
+            <div class="name">Lise Marie Rømo</div>
+            <div class="place">Castillo · Lactic Process · Java Espressobar / Kaffa</div>
+          </div>
+        </div>
+      </div>
+      <div class="wof-year-marker">2016</div>
+      <div class="wof-year-empty"></div>
+    </div>
+
+    <!-- 2017 — Onyx Coffee Lab takes over US -->
+    <div class="wof-year-block">
+      <div class="wof-year-empty"></div>
+      <div class="wof-year-marker">2017</div>
+      <div class="wof-year-content">
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/onyx-champions.jpg" alt="Dylan Siemens US Brewers Cup Champion 2017 Onyx Coffee Lab" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">US Brewers Cup Champion</div>
+            <div class="name">Dylan Siemens</div>
+            <div class="place">Geisha · Lactic Process · <strong>Onyx Coffee Lab</strong></div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/onyx-champions.jpg" alt="Mark Michaelson US Roaster Champion 2017 Onyx Coffee Lab" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">US Roaster Champion</div>
+            <div class="name">Mark Michaelson</div>
+            <div class="place">Geisha Natural Lactic · <strong>Onyx Coffee Lab</strong></div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/wof/craig-simon.jpg" alt="Francesco Masciullo Italy Barista Champion WBC Finalist Seoul 2017" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">Italy Barista Champion · WBC Seoul Finalist</div>
+            <div class="name">Francesco Masciullo</div>
+            <div class="place">Geisha &amp; Sidra · Lactic · Ditta Artigianale</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2018 -->
+    <div class="wof-year-block">
+      <div class="wof-year-content">
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/wof/cole-torode-canadian-2018.jpg" alt="Cole Torode Canadian Barista Champion WBC Finalist Amsterdam 2018" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">Canada Barista Champion · WBC Amsterdam Finalist</div>
+            <div class="name">Cole Torode</div>
+            <div class="place">Geisha &amp; Sidra · Rosso Coffee Roasters</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/wof/tom-kuyken.jpg" alt="Tom Kuyken Norway Brewers Cup Champion 2018" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">Norway Brewers Cup Champion</div>
+            <div class="name">Tom Kuyken</div>
+            <div class="place">Geisha Natural · Kaffa</div>
+          </div>
+        </div>
+      </div>
+      <div class="wof-year-marker">2018</div>
+      <div class="wof-year-empty"></div>
+    </div>
+
+    <!-- 2019 — biggest year -->
+    <div class="wof-year-block">
+      <div class="wof-year-empty"></div>
+      <div class="wof-year-marker">2019</div>
+      <div class="wof-year-content">
+        <div class="wof-champion-row">
+          <div class="wof-portrait" style="width:140px; height:140px;"><img src="assets/wof/jooyeon-jeon.jpg" alt="Jooyeon Jeon World Barista Champion 2019 Boston" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">★ World Barista Champion</div>
+            <div class="name">Jooyeon Jeon</div>
+            <div class="place">South Korea · Sidra Lactic · Momos Coffee</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/cole-wbc-podium.jpg" alt="Cole Torode WBC 2019 Boston Third Place" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">WBC Boston · 3rd Place</div>
+            <div class="name">Cole Torode</div>
+            <div class="place">Canada Barista Champion · Rosso Coffee Roasters</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/wof/sam-spillman.jpg" alt="Samantha Spillman LA Barista Champion 2019" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">LA Barista Champion</div>
+            <div class="name">Samantha Spillman</div>
+            <div class="place">Sidra Lactic · Sunergos Coffee</div>
+          </div>
+        </div>
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/sebastian-brewers-stage.jpg" alt="Sylas Semenza US Barista Finalist 2019" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">US Barista Finalist</div>
+            <div class="name">Sylas Semenza</div>
+            <div class="place">Sidra Lactic · Rooster Coffee Roasters</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2020 -->
+    <div class="wof-year-block">
+      <div class="wof-year-content">
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/heroes-recipient.jpg" alt="Heroes Series recipient Australia" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">Heroes Series · Recipient</div>
+            <div class="name">Australia</div>
+            <div class="place">SL-28 Heroes Series · Direct trade</div>
+          </div>
+        </div>
+      </div>
+      <div class="wof-year-marker">2020</div>
+      <div class="wof-year-empty"></div>
+    </div>
+
+    <!-- 2025 -->
+    <div class="wof-year-block">
+      <div class="wof-year-empty"></div>
+      <div class="wof-year-marker">2025</div>
+      <div class="wof-year-content">
+        <div class="wof-champion-row">
+          <div class="wof-portrait"><img src="assets/wof/gray-kauffman-2025.jpg" alt="Gray Kauffman USBC 2025 Semi-finals Seattle" /></div>
+          <div class="wof-champion-info">
+            <div class="achievement">US Barista Championship · Semi-finals</div>
+            <div class="name">Gray Kauffman</div>
+            <div class="place">Seattle, WA · 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="wof-footer" style="max-width: 1100px; margin: 0 auto;">
+    <span class="countries">Singapore · Athens · Copenhagen · Oslo · Bentonville · Florence · Calgary · Boston · Louisville · Toronto · Sydney · Seattle</span>
+    <br/><br/>
+    <span style="opacity: 0.6;">— Greece, Norway, Italy, USA, Korea, Singapore and counting. The next chapter begins with you.</span>
+  </div>
+</section>
+
+<!-- FOUNDER LETTER -->
+<section class="founder">
+  <div class="container">
+    <div class="founder-grid">
+      <div class="founder-image">
+        <img src="assets/felipe-jooyeon.jpg" alt="Felipe Sardi with Jooyeon Jeon, World Barista Champion 2019" />
+      </div>
+      <div class="founder-text">
+        <div class="section-eyebrow">A note from Felipe</div>
+        <h2 class="section-title">Why we back the people on stage.</h2>
+        <p>I'm in this picture with Jooyeon Jeon, the day she won the 2019 World Barista Championship. She used a coffee from our farm. We didn't pay for placement. We didn't sponsor a campaign.</p>
+        <p>She picked it because it was good. And then she went on stage and made the world taste it.</p>
+        <p>BEAT is our way of saying: if you're going to put a Geisha or a Sidra on a stage, you should know the people who grew it, fermented it, and stayed up at night drying it. We won't be on the stage with you. But we'll be the reason you're memorable.</p>
+        <div class="founder-sig">
+          Felipe
+          <small>Co-founder · La Palma &amp; El Tucán</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="apply">
+  <div class="container">
+    <h2 class="section-title">Apply by [DEADLINE].<br/>Hear back in 14 days.</h2>
+    <p>Submissions close at midnight EST. The kit (rubric guide, video brief, brand assets) lands in your inbox the moment you apply.</p>
+    <a href="#" class="btn btn-primary">Start your application</a>
+    <div class="deadline">20 boxes · 6 kilos each · No second chances this year</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  La Palma &amp; El Tucán · Zipacón, Colombia · BEAT 2026 · #BEATseries
+</footer>
+
+<script>
+  // Nav background on scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+</script>
+
+</body>
+</html>
