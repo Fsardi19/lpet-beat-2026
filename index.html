@@ -1291,10 +1291,10 @@
    * The anon key is PUBLIC by Supabase design. Don't put the
    * service_role key here — that key bypasses RLS.
    * ========================================================= */
-  const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
-  const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
+  const SUPABASE_URL = 'https://uudwwhlmiradgbhfgnjv.supabase.co'; // lpet-marketing project
+  const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';                  // Settings → API → anon key
 
-  const sb = (typeof supabase !== 'undefined' && SUPABASE_URL.indexOf('YOUR_PROJECT') === -1)
+  const sb = (typeof supabase !== 'undefined' && SUPABASE_ANON_KEY.indexOf('YOUR_ANON_KEY') === -1)
     ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 

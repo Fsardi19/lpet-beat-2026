@@ -1,12 +1,19 @@
 # BEAT 2026 — Supabase Connection Setup
 
-This guide walks through wiring the BEAT submission form to a Supabase project.
+Wires the BEAT submission form to the dedicated **`lpet-marketing`** Supabase project (created 27 Apr 2026).
 
-> ⚠️ **Project choice not yet decided.** Felipe runs 3 Supabase projects from separate terminals/MCPs. Replace `[YOUR_PROJECT_REF]` everywhere below with the chosen project ref BEFORE running anything.
->
-> The migration is additive — only adds ONE new table (`beat_submissions_2026`) plus indexes/policies/view. Nothing existing is touched.
->
-> **Recommendation:** dedicate a marketing-only Supabase project to BEAT. Don't mix marketing form data with the CraftLab product database — different lifecycles, different scaling profiles, different access patterns.
+| Detail | Value |
+|---|---|
+| Project name | `lpet-marketing` |
+| Project ref | `uudwwhlmiradgbhfgnjv` |
+| Project URL | `https://uudwwhlmiradgbhfgnjv.supabase.co` |
+| Region | us-east-1 (Virginia) |
+| Tier | micro ($10/month) |
+| Org | la palma y el tucan (Pro) |
+
+This project is **isolated from `craftlab` and `lpt-discovery`** — marketing forms have their own lifecycle and won't affect product or research data.
+
+The migration is additive: creates one new table (`beat_submissions_2026`) plus indexes, policies, and a pipeline view. First migration of this project.
 
 ---
 
@@ -22,11 +29,11 @@ You can run it any of three ways:
 
 ### Option A: Supabase MCP (your other terminal)
 ```
-Run /Users/felipesardi/Desktop/DOCS CAFE TOSTADO/AI STRATEGY/lpet-marketing-hub/referencias/proyectos/landing-beat-2026/migrations/001_beat_submissions.sql against project [YOUR_PROJECT_REF]
+Run /Users/felipesardi/Desktop/DOCS CAFE TOSTADO/AI STRATEGY/lpet-marketing-hub/referencias/proyectos/landing-beat-2026/migrations/001_beat_submissions.sql against project uudwwhlmiradgbhfgnjv
 ```
 
 ### Option B: Supabase Dashboard SQL Editor
-1. Open https://supabase.com/dashboard/project/[YOUR_PROJECT_REF]/sql
+1. Open https://supabase.com/dashboard/project/uudwwhlmiradgbhfgnjv/sql
 2. Paste the contents of `001_beat_submissions.sql`
 3. Click "Run"
 
@@ -50,9 +57,9 @@ Both should return without errors (the first will return zero rows; the second r
 
 ## Step 2 — Get your Supabase URL and anon key
 
-1. Open https://supabase.com/dashboard/project/[YOUR_PROJECT_REF]/settings/api
+1. Open https://supabase.com/dashboard/project/uudwwhlmiradgbhfgnjv/settings/api
 2. Copy these two values:
-   - **Project URL** (looks like `https://[YOUR_PROJECT_REF].supabase.co`)
+   - **Project URL** (looks like `https://uudwwhlmiradgbhfgnjv.supabase.co`)
    - **anon / public** API key (the one labeled `anon`, NOT `service_role`)
 
 > The anon key is **public by design**. It's safe to ship in browser JS. The `service_role` key, however, must NEVER be in browser code.
@@ -71,7 +78,7 @@ const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
 Replace with the values from Step 2:
 
 ```javascript
-const SUPABASE_URL = 'https://[YOUR_PROJECT_REF].supabase.co';
+const SUPABASE_URL = 'https://uudwwhlmiradgbhfgnjv.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ...';  // your anon key
 ```
 
