@@ -3,7 +3,66 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BEAT 2026 — La Palma & El Tucán</title>
+<meta name="theme-color" content="#FCF8EC" />
+
+<title>BEAT 2026 — La Palma &amp; El Tucán | A coffee grant for competition baristas</title>
+
+<meta name="description" content="20 boxes. 6 kg each. Awarded to barista and brewer competitors worldwide. No fee, no agent, no auction. Apply with a 2-minute video by August 31, 2026." />
+<meta name="keywords" content="BEAT, La Palma El Tucán, barista competition, brewers cup, WBC, USBC, coffee competition grant, specialty coffee, Colombian coffee, Geisha, Sidra" />
+
+<!-- Open Graph (WhatsApp, Instagram, Facebook) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="La Palma & El Tucán" />
+<meta property="og:title" content="BEAT 2026 — A coffee grant for competition baristas" />
+<meta property="og:description" content="20 boxes. 6 kilos of green coffee each. Awarded — not sold — to baristas worldwide. Apply by August 31, 2026." />
+<meta property="og:url" content="https://fsardi19.github.io/lpet-beat-2026/" />
+<meta property="og:image" content="https://fsardi19.github.io/lpet-beat-2026/assets/hero-heart.png" />
+<meta property="og:image:width" content="1456" />
+<meta property="og:image:height" content="816" />
+<meta property="og:image:alt" content="BEAT — Behind every routine, a shared heartbeat" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="BEAT 2026 — La Palma & El Tucán" />
+<meta name="twitter:description" content="20 boxes of competition green coffee. Awarded, not sold. Apply by August 31, 2026." />
+<meta name="twitter:image" content="https://fsardi19.github.io/lpet-beat-2026/assets/hero-heart.png" />
+
+<!-- Canonical -->
+<link rel="canonical" href="https://fsardi19.github.io/lpet-beat-2026/" />
+
+<!-- Schema.org Event -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "BEAT 2026 — La Palma & El Tucán",
+  "description": "Annual competition coffee grant. 20 boxes, 6 kg each, awarded to barista and brewer competitors worldwide. Submissions accepted by 2-minute video.",
+  "startDate": "2026-04-27",
+  "endDate": "2026-08-31T23:59:00-05:00",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+  "location": {
+    "@type": "VirtualLocation",
+    "url": "https://fsardi19.github.io/lpet-beat-2026/"
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "La Palma & El Tucán",
+    "url": "https://lapalmayeltucan.com"
+  },
+  "image": "https://fsardi19.github.io/lpet-beat-2026/assets/hero-heart.png",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://fsardi19.github.io/lpet-beat-2026/#apply",
+    "validFrom": "2026-04-27"
+  }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -134,11 +193,24 @@
   .btn-ghost:hover { background: white; color: var(--ink); }
 
   .hero-footer {
-    position: absolute; bottom: 32px; left: 0; right: 0; z-index: 2;
-    text-align: center; color: rgba(255,255,255,0.7);
-    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    position: absolute; bottom: 28px; left: 0; right: 0; z-index: 2;
+    text-align: center;
   }
-  .hero-footer strong { color: white; font-weight: 500; }
+  .hero-chips {
+    color: rgba(255,255,255,0.92);
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-weight: 400;
+    display: inline-flex; flex-wrap: wrap;
+    gap: 0 14px; justify-content: center;
+    padding: 0 16px;
+  }
+  .hero-chips span { white-space: nowrap; }
+  .hero-trust {
+    margin-top: 14px;
+    color: rgba(255,255,255,0.6);
+    font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+  }
+  .hero-trust strong { color: rgba(255,255,255,0.9); font-weight: 500; }
 
   /* ============ SECTION BASE ============ */
   section { padding: 120px 48px; }
@@ -472,18 +544,34 @@
   .form-field .help { font-size: 12px; opacity: 0.6; margin-top: 2px; }
   .form-field .char-count { font-size: 11px; opacity: 0.5; text-align: right; }
 
-  .category-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .category-options {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    border: 0; padding: 0; margin: 0;
+  }
+  .category-options legend {
+    position: absolute; width: 1px; height: 1px; padding: 0;
+    margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;
+  }
   .category-option {
     border: 1px solid var(--line-soft);
     border-radius: var(--radius);
     padding: 14px; text-align: center;
     cursor: pointer; transition: all 0.2s;
     font-size: 13px; background: var(--paper-pure);
+    display: block; user-select: none;
   }
   .category-option:hover { border-color: var(--accent); }
-  .category-option input { display: none; }
+  .category-option input[type="radio"] {
+    position: absolute; opacity: 0; width: 0; height: 0;
+    pointer-events: none;
+  }
+  .category-option:has(input:checked),
   .category-option.selected {
     border-color: var(--accent); background: var(--accent); color: white;
+  }
+  .category-option:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
   .consent-row { margin-top: 20px; }
@@ -722,11 +810,21 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .hero-content > * { animation: fadeUp 1s ease forwards; opacity: 0; }
-  .hero-content > *:nth-child(1) { animation-delay: 0.2s; }
-  .hero-content > *:nth-child(2) { animation-delay: 0.4s; }
-  .hero-content > *:nth-child(3) { animation-delay: 0.6s; }
-  .hero-content > *:nth-child(4) { animation-delay: 0.8s; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-content > * { animation: fadeUp 1s ease forwards; opacity: 0; }
+    .hero-content > *:nth-child(1) { animation-delay: 0.2s; }
+    .hero-content > *:nth-child(2) { animation-delay: 0.4s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.6s; }
+    .hero-content > *:nth-child(4) { animation-delay: 0.8s; }
+    .hero-content > *:nth-child(5) { animation-delay: 1.0s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .modal { animation: none; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -758,7 +856,18 @@
     <img src="assets/hero-heart.png" alt="" />
   </div>
   <div class="hero-footer">
-    Trusted on stage at <strong>WBC</strong> · <strong>Brewers Cup</strong> · <strong>COE Finals</strong>
+    <div class="hero-chips">
+      <span>Free to apply</span>
+      <span>·</span>
+      <span>Awarded, not sold</span>
+      <span>·</span>
+      <span>No agent, no contract</span>
+      <span>·</span>
+      <span>20 selected by jury</span>
+    </div>
+    <div class="hero-trust">
+      Used on stage at <strong>WBC</strong> · <strong>Brewers Cup</strong> · <strong>USBC</strong> by 23 champions since 2016
+    </div>
   </div>
 </header>
 
@@ -792,7 +901,7 @@
       <h3 style="font-family: var(--serif); font-size: 28px; line-height: 1.25; margin-bottom: 24px; color: var(--ink); font-weight: 400;">A thank-you note, written in green coffee.</h3>
       <p style="font-size: 17px; line-height: 1.7; color: var(--ink); margin-bottom: 18px;">BEAT exists because the specialty coffee industry took a chance on us when we were a young finca with one ferment tank, no auction record, and a Sidra varietal nobody outside Cundinamarca had heard of.</p>
       <p style="font-size: 17px; line-height: 1.7; color: var(--ink); margin-bottom: 18px;">The roasters who paid us a fair price for our first lots. The baristas who put our coffees on their competition cards. The importers who said yes before we had a website. They built this farm with us — and to them, this is our most direct way of saying <em>thank you</em>.</p>
-      <p style="font-size: 17px; line-height: 1.7; color: var(--ink);">BEAT is how we pay it forward to the next generation of competitors who haven't yet won a regional, who won't be bidding at auction, but who deserve a coffee good enough to take to a final.</p>
+      <p style="font-size: 17px; line-height: 1.7; color: var(--ink);">BEAT is how we pay it forward to the next generation of competitors. <strong>First-timers are especially welcome.</strong> You don't need a regional title or a roastery sponsor — you need a story you believe in, and a craft you're committed to.</p>
       <p style="font-size: 22px; line-height: 1.4; color: var(--ink); font-family: var(--serif); margin-top: 36px; font-style: italic;">20 boxes. 6 kilos each. No bidding war. Just craft.</p>
     </div>
 
@@ -832,7 +941,7 @@
       </div>
       <div class="step">
         <h3>Get scored</h3>
-        <p>Our jury reviews against a transparent rubric. The community votes. The most-shared get a bonus.</p>
+        <p>A jury of working baristas and roasters reviews against a transparent rubric. Your craft is what's being judged — not your reach.</p>
       </div>
       <div class="step">
         <h3>Get the box</h3>
@@ -883,10 +992,10 @@
           </div>
         </div>
         <div class="rubric-item">
-          <div class="rubric-weight">+</div>
+          <div class="rubric-weight">★</div>
           <div>
-            <div class="rubric-name">Community bonus</div>
-            <div class="rubric-desc">Top 5 most-liked submissions earn additional points.</div>
+            <div class="rubric-name">Community Choice Award</div>
+            <div class="rubric-desc">Separate recognition for the 5 most-liked submissions. <em>Does not affect jury scoring.</em></div>
           </div>
         </div>
       </div>
@@ -1236,9 +1345,9 @@
 <!-- ============================================================ -->
 <!-- SUBMISSION MODAL -->
 <!-- ============================================================ -->
-<div class="modal-backdrop" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal">
-    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+<div class="modal-backdrop" id="submitModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close application form">&times;</button>
 
     <!-- FORM STATE -->
     <div id="formState">
@@ -1287,16 +1396,28 @@
         <!-- Category -->
         <div class="form-row single">
           <div class="form-field">
-            <label>Category <span class="req">*</span></label>
-            <div class="category-options" id="categoryOptions">
-              <div class="category-option" data-value="barista">Barista</div>
-              <div class="category-option" data-value="brewers_cup">Brewers Cup</div>
-              <div class="category-option" data-value="aeropress">AeroPress</div>
-              <div class="category-option" data-value="cigs">Coffee in Good Spirits</div>
-              <div class="category-option" data-value="roaster">Roasting</div>
-              <div class="category-option" data-value="other">Other</div>
-            </div>
-            <input type="hidden" id="category" name="category" required />
+            <label id="categoryLabel">Category <span class="req">*</span></label>
+            <fieldset class="category-options" id="categoryOptions" aria-labelledby="categoryLabel">
+              <legend>Category</legend>
+              <label class="category-option">
+                <input type="radio" name="category" value="barista" /> Barista
+              </label>
+              <label class="category-option">
+                <input type="radio" name="category" value="brewers_cup" /> Brewers Cup
+              </label>
+              <label class="category-option">
+                <input type="radio" name="category" value="aeropress" /> AeroPress
+              </label>
+              <label class="category-option">
+                <input type="radio" name="category" value="cigs" /> Coffee in Good Spirits
+              </label>
+              <label class="category-option">
+                <input type="radio" name="category" value="roaster" /> Roasting
+              </label>
+              <label class="category-option">
+                <input type="radio" name="category" value="other" /> Other
+              </label>
+            </fieldset>
           </div>
         </div>
 
@@ -1387,21 +1508,47 @@
     ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
-  /* ---- Modal open/close ---- */
+  /* ---- Modal open/close + focus trap (a11y) ---- */
   const modal = document.getElementById('submitModal');
+  const modalInner = modal.querySelector('.modal');
   const modalClose = document.getElementById('modalClose');
   const formState = document.getElementById('formState');
   const successState = document.getElementById('successState');
+  let lastTrigger = null;
 
-  function openModal() {
+  function getFocusableInModal() {
+    const sel = 'button:not([disabled]), input:not([disabled]):not([type="hidden"]), textarea:not([disabled]), select:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])';
+    return Array.from(modalInner.querySelectorAll(sel))
+      .filter(el => el.offsetParent !== null);
+  }
+  function trapFocus(e) {
+    if (e.key !== 'Tab') return;
+    const f = getFocusableInModal();
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  }
+  function openModal(triggerEl) {
+    lastTrigger = triggerEl || document.activeElement;
     modal.classList.add('open');
     document.body.classList.add('modal-open');
     formState.style.display = 'block';
     successState.classList.remove('show');
+    setTimeout(() => {
+      const first = getFocusableInModal().find(el => el !== modalClose) || modalClose;
+      first.focus();
+    }, 30);
+    modalInner.addEventListener('keydown', trapFocus);
   }
   function closeModal() {
     modal.classList.remove('open');
     document.body.classList.remove('modal-open');
+    modalInner.removeEventListener('keydown', trapFocus);
+    if (lastTrigger && typeof lastTrigger.focus === 'function') lastTrigger.focus();
   }
   modalClose.addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
@@ -1410,18 +1557,21 @@
   // Wire all "Submit" / "Apply" CTAs to open the modal
   document.querySelectorAll('a[href="#apply"], a.btn-primary').forEach(el => {
     if (el.textContent.match(/Submit your video|Start your application|Apply/i)) {
-      el.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+      el.addEventListener('click', (e) => { e.preventDefault(); openModal(el); });
     }
   });
 
-  /* ---- Category radio behavior ---- */
-  document.querySelectorAll('.category-option').forEach(opt => {
-    opt.addEventListener('click', () => {
+  /* ---- Category — visual selection sync (CSS :has does most of it; this is a fallback for older browsers) ---- */
+  document.querySelectorAll('.category-options input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
       document.querySelectorAll('.category-option').forEach(o => o.classList.remove('selected'));
-      opt.classList.add('selected');
-      document.getElementById('category').value = opt.dataset.value;
+      if (radio.checked) radio.closest('.category-option').classList.add('selected');
     });
   });
+  function getSelectedCategory() {
+    const checked = document.querySelector('.category-options input[name="category"]:checked');
+    return checked ? checked.value : '';
+  }
 
   /* ---- Pitch char counter ---- */
   const pitch = document.getElementById('pitch_text');
@@ -1453,7 +1603,7 @@
     const fullName = document.getElementById('full_name').value.trim();
     const email = document.getElementById('email').value.trim().toLowerCase();
     const country = document.getElementById('country').value.trim();
-    const cat = document.getElementById('category').value;
+    const cat = getSelectedCategory();
     const videoUrl = document.getElementById('video_url').value.trim();
     const pitch = document.getElementById('pitch_text').value.trim();
 
