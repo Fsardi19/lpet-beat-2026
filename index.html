@@ -398,6 +398,149 @@
   }
   .wof-footer .countries { color: var(--gold); font-weight: 500; }
 
+  /* ============ SUBMISSION MODAL ============ */
+  .modal-backdrop {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(10,10,10,0.78);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: none; align-items: flex-start; justify-content: center;
+    padding: 5vh 16px; overflow-y: auto;
+  }
+  .modal-backdrop.open { display: flex; }
+  body.modal-open { overflow: hidden; }
+
+  .modal {
+    background: var(--paper);
+    border-radius: 8px;
+    width: 100%; max-width: 720px;
+    padding: 56px 56px 48px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    animation: modalRise 0.4s ease-out;
+  }
+  @keyframes modalRise {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: none; cursor: pointer;
+    width: 36px; height: 36px;
+    color: var(--ink); opacity: 0.6;
+    font-size: 24px; line-height: 1;
+    transition: opacity 0.2s;
+  }
+  .modal-close:hover { opacity: 1; }
+
+  .modal-eyebrow {
+    font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px; font-weight: 500;
+  }
+  .modal-title {
+    font-family: var(--serif);
+    font-size: 36px; line-height: 1.1; font-weight: 400;
+    margin-bottom: 12px; color: var(--ink-deep);
+  }
+  .modal-sub { font-size: 15px; opacity: 0.8; margin-bottom: 32px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 18px; }
+  .form-row.single { grid-template-columns: 1fr; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field label {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink); opacity: 0.7;
+  }
+  .form-field label .req { color: var(--accent); }
+  .form-field input, .form-field textarea, .form-field select {
+    padding: 12px 14px;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    font-family: var(--sans);
+    font-size: 15px;
+    background: var(--paper-pure);
+    color: var(--ink-deep);
+    transition: border-color 0.2s;
+  }
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
+    outline: none; border-color: var(--accent);
+  }
+  .form-field textarea { min-height: 120px; resize: vertical; }
+  .form-field .help { font-size: 12px; opacity: 0.6; margin-top: 2px; }
+  .form-field .char-count { font-size: 11px; opacity: 0.5; text-align: right; }
+
+  .category-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .category-option {
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 14px; text-align: center;
+    cursor: pointer; transition: all 0.2s;
+    font-size: 13px; background: var(--paper-pure);
+  }
+  .category-option:hover { border-color: var(--accent); }
+  .category-option input { display: none; }
+  .category-option.selected {
+    border-color: var(--accent); background: var(--accent); color: white;
+  }
+
+  .consent-row { margin-top: 20px; }
+  .consent-row label {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13px; line-height: 1.5; cursor: pointer;
+    margin-bottom: 12px;
+    text-transform: none; letter-spacing: 0; opacity: 1;
+  }
+  .consent-row input[type="checkbox"] {
+    margin-top: 3px; width: 16px; height: 16px;
+    accent-color: var(--accent); flex-shrink: 0;
+  }
+
+  .form-submit-row {
+    margin-top: 32px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  .form-submit-row small { font-size: 12px; opacity: 0.6; }
+  .form-submit {
+    padding: 14px 36px; background: var(--accent); color: white;
+    border: 1px solid var(--accent); border-radius: var(--radius);
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--accent-deep); }
+  .form-submit:disabled { background: #999; border-color: #999; cursor: not-allowed; opacity: 0.6; }
+
+  .form-message {
+    margin-top: 16px; padding: 12px 16px;
+    border-radius: var(--radius); font-size: 14px;
+    display: none;
+  }
+  .form-message.show { display: block; }
+  .form-message.error { background: #FEE; color: #B91C1C; border: 1px solid #FECACA; }
+  .form-message.success { background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
+
+  .form-success-state { display: none; text-align: center; padding: 20px 0; }
+  .form-success-state.show { display: block; }
+  .form-success-state .success-mark {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    display: inline-flex; align-items: center; justify-content: center;
+    color: white; font-size: 32px; margin-bottom: 24px;
+  }
+  .form-success-state h3 {
+    font-family: var(--serif); font-size: 28px;
+    color: var(--ink-deep); margin-bottom: 12px; font-weight: 400;
+  }
+  .form-success-state p { opacity: 0.8; }
+
+  @media (max-width: 768px) {
+    .modal { padding: 40px 24px 32px; }
+    .form-row { grid-template-columns: 1fr; gap: 16px; }
+    .category-options { grid-template-columns: repeat(2, 1fr); }
+    .form-submit-row { flex-direction: column; align-items: stretch; }
+    .modal-title { font-size: 28px; }
+  }
+
   /* ============ FOUNDER LETTER ============ */
   .founder {
     background: var(--paper-warm);
@@ -1001,8 +1144,272 @@
   La Palma &amp; El Tucán · Zipacón, Colombia · BEAT 2026 · #BEATseries
 </footer>
 
+<!-- ============================================================ -->
+<!-- SUBMISSION MODAL -->
+<!-- ============================================================ -->
+<div class="modal-backdrop" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+
+    <!-- FORM STATE -->
+    <div id="formState">
+      <div class="modal-eyebrow">BEAT 2026 — Application</div>
+      <h2 class="modal-title" id="modalTitle">Submit your video.</h2>
+      <p class="modal-sub">Tell us who you are, where you're competing, and why this craft matters to you. The form takes about 5 minutes. Your submission is locked once you press send.</p>
+
+      <form id="beatForm" novalidate>
+
+        <!-- Identity -->
+        <div class="form-row">
+          <div class="form-field">
+            <label for="full_name">Full name <span class="req">*</span></label>
+            <input type="text" id="full_name" name="full_name" required maxlength="120" />
+          </div>
+          <div class="form-field">
+            <label for="email">Email <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="country">Country <span class="req">*</span></label>
+            <input type="text" id="country" name="country" required maxlength="60" placeholder="e.g. Japan, Colombia, USA" />
+          </div>
+          <div class="form-field">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" maxlength="80" placeholder="e.g. Tokyo, Bogotá" />
+          </div>
+        </div>
+
+        <!-- Public handles -->
+        <div class="form-row">
+          <div class="form-field">
+            <label for="instagram_handle">Instagram (for voting)</label>
+            <input type="text" id="instagram_handle" name="instagram_handle" maxlength="60" placeholder="@yourhandle" />
+            <span class="help">We tag you when we share your video.</span>
+          </div>
+          <div class="form-field">
+            <label for="tiktok_handle">TikTok (optional)</label>
+            <input type="text" id="tiktok_handle" name="tiktok_handle" maxlength="60" placeholder="@yourhandle" />
+          </div>
+        </div>
+
+        <!-- Category -->
+        <div class="form-row single">
+          <div class="form-field">
+            <label>Category <span class="req">*</span></label>
+            <div class="category-options" id="categoryOptions">
+              <div class="category-option" data-value="barista">Barista</div>
+              <div class="category-option" data-value="brewers_cup">Brewers Cup</div>
+              <div class="category-option" data-value="aeropress">AeroPress</div>
+              <div class="category-option" data-value="cigs">Coffee in Good Spirits</div>
+              <div class="category-option" data-value="roaster">Roasting</div>
+              <div class="category-option" data-value="other">Other</div>
+            </div>
+            <input type="hidden" id="category" name="category" required />
+          </div>
+        </div>
+
+        <!-- Video URL -->
+        <div class="form-row single">
+          <div class="form-field">
+            <label for="video_url">Video link (YouTube, Vimeo or Drive) <span class="req">*</span></label>
+            <input type="url" id="video_url" name="video_url" required placeholder="https://..." />
+            <span class="help">2 to 2.5 minutes. Make sure the link is unlisted or public — not private.</span>
+          </div>
+        </div>
+
+        <!-- Pitch -->
+        <div class="form-row single">
+          <div class="form-field">
+            <label for="pitch_text">Why BEAT, in your own words <span class="req">*</span></label>
+            <textarea id="pitch_text" name="pitch_text" required minlength="50" maxlength="800" placeholder="What does this craft mean to you? What competition are you preparing for, and why does this coffee fit?"></textarea>
+            <span class="char-count"><span id="pitchCount">0</span> / 800</span>
+          </div>
+        </div>
+
+        <!-- Pro context -->
+        <div class="form-row">
+          <div class="form-field">
+            <label for="current_roastery">Current roastery / cafe</label>
+            <input type="text" id="current_roastery" name="current_roastery" maxlength="120" />
+          </div>
+          <div class="form-field">
+            <label for="past_competitions">Past competitions</label>
+            <input type="text" id="past_competitions" name="past_competitions" maxlength="200" placeholder="e.g. National Barista 2024 (3rd)" />
+          </div>
+        </div>
+
+        <!-- Consent -->
+        <div class="consent-row">
+          <label>
+            <input type="checkbox" id="consent_data" name="consent_data" required />
+            <span>I authorize La Palma &amp; El Tucán to store this submission for the BEAT 2026 contest selection process. <span class="req">*</span></span>
+          </label>
+          <label>
+            <input type="checkbox" id="consent_amplify" name="consent_amplify" />
+            <span>(Optional) I'm happy for LP&amp;ET to share my video on their channels with credit, regardless of contest outcome.</span>
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-submit-row">
+          <small>Deadline: <strong>August 31, 2026</strong>. Locked once submitted.</small>
+          <button type="submit" class="form-submit" id="submitBtn">Send application</button>
+        </div>
+
+        <div class="form-message error" id="errorMsg"></div>
+      </form>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="form-success-state" id="successState">
+      <div class="success-mark">✓</div>
+      <h3>Application received.</h3>
+      <p>You'll hear from the BEAT jury within 14 days at the email you provided. In the meantime, follow <strong>@lapalmayeltucan</strong> for updates and the public voting round.</p>
+      <p style="margin-top: 20px; font-size: 13px; opacity: 0.7;">— <em>Felipe &amp; the LP&amp;ET team</em></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SUPABASE CLIENT (CDN) -->
+<!-- ============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-  // Nav background on scroll
+  /* =========================================================
+   * BEAT 2026 — Form submission logic
+   * =========================================================
+   *
+   * BEFORE GOING LIVE: Replace SUPABASE_URL and SUPABASE_ANON_KEY
+   * below with the real values from your Supabase project.
+   *   Supabase Dashboard → Settings → API
+   *
+   * The anon key is PUBLIC by Supabase design. Don't put the
+   * service_role key here — that key bypasses RLS.
+   * ========================================================= */
+  const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
+  const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
+
+  const sb = (typeof supabase !== 'undefined' && SUPABASE_URL.indexOf('YOUR_PROJECT') === -1)
+    ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+
+  /* ---- Modal open/close ---- */
+  const modal = document.getElementById('submitModal');
+  const modalClose = document.getElementById('modalClose');
+  const formState = document.getElementById('formState');
+  const successState = document.getElementById('successState');
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.classList.add('modal-open');
+    formState.style.display = 'block';
+    successState.classList.remove('show');
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.classList.remove('modal-open');
+  }
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+  // Wire all "Submit" / "Apply" CTAs to open the modal
+  document.querySelectorAll('a[href="#apply"], a.btn-primary').forEach(el => {
+    if (el.textContent.match(/Submit your video|Start your application|Apply/i)) {
+      el.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    }
+  });
+
+  /* ---- Category radio behavior ---- */
+  document.querySelectorAll('.category-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.category-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      document.getElementById('category').value = opt.dataset.value;
+    });
+  });
+
+  /* ---- Pitch char counter ---- */
+  const pitch = document.getElementById('pitch_text');
+  const pitchCount = document.getElementById('pitchCount');
+  pitch.addEventListener('input', () => { pitchCount.textContent = pitch.value.length; });
+
+  /* ---- UTM capture ---- */
+  function getUtmParams() {
+    const p = new URLSearchParams(window.location.search);
+    return {
+      utm_source: p.get('utm_source'),
+      utm_medium: p.get('utm_medium'),
+      utm_campaign: p.get('utm_campaign'),
+      referrer: document.referrer || null,
+      user_agent: navigator.userAgent
+    };
+  }
+
+  /* ---- Form submission ---- */
+  const form = document.getElementById('beatForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const errorMsg = document.getElementById('errorMsg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorMsg.classList.remove('show');
+
+    const cat = document.getElementById('category').value;
+    if (!cat) { showError('Please select a category.'); return; }
+    if (!document.getElementById('consent_data').checked) {
+      showError('Data consent is required.'); return;
+    }
+
+    const payload = {
+      full_name: document.getElementById('full_name').value.trim(),
+      email: document.getElementById('email').value.trim().toLowerCase(),
+      country: document.getElementById('country').value.trim(),
+      city: nullable(document.getElementById('city').value),
+      instagram_handle: nullable(document.getElementById('instagram_handle').value),
+      tiktok_handle: nullable(document.getElementById('tiktok_handle').value),
+      category: cat,
+      video_url: document.getElementById('video_url').value.trim(),
+      pitch_text: document.getElementById('pitch_text').value.trim(),
+      current_roastery: nullable(document.getElementById('current_roastery').value),
+      past_competitions: nullable(document.getElementById('past_competitions').value),
+      consent_data: document.getElementById('consent_data').checked,
+      consent_amplify: document.getElementById('consent_amplify').checked,
+      ...getUtmParams()
+    };
+
+    submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
+
+    if (!sb) {
+      showError('Form is not connected yet. Please contact felipe@lapalmayeltucan.com.');
+      submitBtn.disabled = false; submitBtn.textContent = 'Send application';
+      return;
+    }
+
+    try {
+      const { error } = await sb.from('beat_submissions_2026').insert([payload]);
+      if (error) throw error;
+      formState.style.display = 'none';
+      successState.classList.add('show');
+    } catch (err) {
+      console.error('BEAT submission error:', err);
+      showError('Something went wrong. Please try again, or email felipe@lapalmayeltucan.com.');
+      submitBtn.disabled = false; submitBtn.textContent = 'Send application';
+    }
+  });
+
+  function showError(text) {
+    errorMsg.textContent = text;
+    errorMsg.classList.add('show');
+  }
+  function nullable(v) { v = (v || '').trim(); return v === '' ? null : v; }
+
+  /* ---- Nav background on scroll ---- */
   window.addEventListener('scroll', () => {
     document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
   });
