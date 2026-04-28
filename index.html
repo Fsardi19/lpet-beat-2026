@@ -7,7 +7,7 @@
 
 <title>BEAT 2026 — La Palma &amp; El Tucán | A coffee grant for competition baristas</title>
 
-<meta name="description" content="20 boxes. 6 kg each. Awarded to barista and brewer competitors worldwide. No fee, no agent, no auction. Apply with a 2-minute video by August 31, 2026." />
+<meta name="description" content="20 boxes. 6 kilos each. Awarded to barista and brewer competitors worldwide. No fee, no agent, no auction. Apply with a 2-minute video by August 31, 2026." />
 <meta name="keywords" content="BEAT, La Palma El Tucán, barista competition, brewers cup, WBC, USBC, coffee competition grant, specialty coffee, Colombian coffee, Geisha, Sidra" />
 
 <!-- Open Graph (WhatsApp, Instagram, Facebook) -->
@@ -308,53 +308,40 @@
   /* ============ COMPETITIONS CALENDAR ============ */
   .calendar { background: var(--paper); }
   .calendar .container { max-width: 1180px; }
-  .calendar-grid {
+  .cal-regions {
     display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; margin-top: 56px;
-    background: var(--line);
+    gap: 32px; margin-top: 56px;
+  }
+  .cal-region {
+    background: var(--paper-warm);
+    padding: 32px 28px;
+    border-radius: var(--radius);
     border: 1px solid var(--line);
   }
-  .cal-event {
-    background: var(--paper);
-    padding: 32px 28px;
-    transition: background 0.25s;
-    position: relative;
-  }
-  .cal-event:hover { background: var(--paper-warm); }
-  .cal-event.highlight {
-    background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper) 100%);
-  }
-  .cal-event.highlight::before {
-    content: ''; position: absolute; top: 0; left: 0;
-    width: 3px; height: 100%; background: var(--accent);
-  }
-  .cal-date {
+  .cal-region-title {
     font-family: var(--serif);
+    font-size: 22px; font-weight: 400;
     color: var(--accent);
-    font-size: 14px; letter-spacing: 0.05em;
-    margin-bottom: 14px;
-    display: flex; align-items: baseline; gap: 6px;
-    flex-wrap: wrap;
+    margin-bottom: 20px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--gold-soft);
+    letter-spacing: 0.02em;
   }
-  .cal-date .cal-month { font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; }
-  .cal-date .cal-day { font-size: 22px; color: var(--ink-deep); font-weight: 400; }
-  .cal-date .cal-year { color: var(--ink); opacity: 0.5; font-size: 12px; letter-spacing: 0.15em; }
-  .cal-name {
-    font-family: var(--serif); font-weight: 400;
-    font-size: 19px; line-height: 1.2;
-    color: var(--ink-deep);
-    margin-bottom: 6px;
+  .cal-list { list-style: none; margin: 0; padding: 0; }
+  .cal-list li {
+    display: flex; flex-direction: column; gap: 2px;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
   }
-  .cal-where {
-    font-size: 13px; opacity: 0.7;
-    margin-bottom: 10px;
+  .cal-list li:last-child { border-bottom: none; }
+  .cal-country {
+    font-family: var(--serif);
+    font-size: 16px; color: var(--ink-deep);
+    line-height: 1.2;
   }
-  .cal-note {
-    font-size: 12px; line-height: 1.5;
-    color: var(--ink); opacity: 0.6;
-    font-style: italic;
+  .cal-when {
+    font-size: 12px; color: var(--ink); opacity: 0.7;
+    letter-spacing: 0.05em;
   }
-  .cal-note strong { color: var(--accent); font-style: normal; opacity: 1; }
   .calendar-nationals {
     margin-top: 56px; padding: 32px;
     background: var(--paper-warm); border-radius: var(--radius);
@@ -813,9 +800,11 @@
     .step h3 { font-size: 20px; }
 
     /* CALENDAR */
-    .calendar-grid { grid-template-columns: 1fr; }
-    .cal-event { padding: 24px 20px; }
-    .cal-name { font-size: 17px; }
+    .cal-regions { grid-template-columns: 1fr; gap: 20px; margin-top: 40px; }
+    .cal-region { padding: 24px 20px; }
+    .cal-region-title { font-size: 19px; margin-bottom: 16px; padding-bottom: 12px; }
+    .cal-country { font-size: 15px; }
+    .cal-when { font-size: 11px; }
     .calendar-nationals { padding: 24px; margin-top: 40px; }
     .calendar-nationals p { font-size: 14px; }
 
@@ -937,7 +926,7 @@
   <div class="hero-content">
     <div class="hero-eyebrow">BEAT 2026 — First Edition</div>
     <h1>Behind every routine,<br/>a shared heartbeat.</h1>
-    <p class="hero-sub">20 boxes. 20 competitors. <strong>Sized for your category</strong> — 6 kg for filter, up to 12.5 kg for espresso. Green, single-origin, traceable to the lot. Apply with a 2-minute video by August 31, 2026.</p>
+    <p class="hero-sub">20 boxes. 20 competitors. 6 kilos each — green, single-origin, traceable to the lot. Apply with a 2-minute video by August 31, 2026.</p>
     <div class="hero-cta-group">
       <a href="#apply" class="btn btn-primary">Submit your video</a>
       <a href="#rubric" class="btn btn-ghost">See the rubric</a>
@@ -1036,7 +1025,7 @@
       </div>
       <div class="step">
         <h3>Get the box</h3>
-        <p>20 selected competitors receive a BEAT lot sized for their category — 6 kg for filter, up to 12.5 kg for espresso. Variety, protocol, and producer story sheet included.</p>
+        <p>20 selected competitors receive a 6 kg BEAT lot — variety, protocol, and producer story sheet included.</p>
       </div>
       <div class="step">
         <h3>Compete</h3>
@@ -1049,52 +1038,57 @@
 <!-- COMPETITIONS CALENDAR -->
 <section class="calendar" id="calendar">
   <div class="container">
-    <div class="section-eyebrow">Competitions BEAT supports</div>
-    <h2 class="section-title">Tell us where you're competing.<br/>We'll deliver in time.</h2>
-    <p class="section-lede">When you apply, mark the competition you're preparing for. We'll size your lot and arrange shipping so it lands before your training cycle starts.</p>
+    <div class="section-eyebrow">Competitions BEAT supports — 2026</div>
+    <h2 class="section-title">22 countries. One harvest.<br/>Tell us where you're competing.</h2>
+    <p class="section-lede">When you apply, mark the country and event you're preparing for. We'll arrange shipping so your BEAT lot lands before your training cycle starts.</p>
 
-    <div class="calendar-grid">
-      <article class="cal-event">
-        <div class="cal-date"><span class="cal-month">Oct</span> <span class="cal-day">14–17</span> <span class="cal-year">2026</span></div>
-        <h3 class="cal-name">SCAJ World Specialty Coffee</h3>
-        <div class="cal-where">Tokyo, Japan</div>
-        <div class="cal-note">Asian finals · key for visibility in Japan and Korea</div>
-      </article>
-      <article class="cal-event">
-        <div class="cal-date"><span class="cal-month">Oct</span> <span class="cal-day">23–25</span> <span class="cal-year">2026</span></div>
-        <h3 class="cal-name">World of Coffee Panama</h3>
-        <div class="cal-where">Panama City, Panama</div>
-        <div class="cal-note">Central American finals · regional springboard</div>
-      </article>
-      <article class="cal-event">
-        <div class="cal-date"><span class="cal-month">Nov</span> <span class="cal-day">·</span> <span class="cal-year">2026</span></div>
-        <h3 class="cal-name">Café de Colombia Expo</h3>
-        <div class="cal-where">Bogotá, Colombia</div>
-        <div class="cal-note">Home turf · the loudest crowd in the room</div>
-      </article>
-      <article class="cal-event">
-        <div class="cal-date"><span class="cal-month">Jan</span> <span class="cal-day">28–29</span> <span class="cal-year">2027</span></div>
-        <h3 class="cal-name">World of Coffee Dubai</h3>
-        <div class="cal-where">Dubai, UAE</div>
-        <div class="cal-note">Middle East hub · the premium specialty market</div>
-      </article>
-      <article class="cal-event">
-        <div class="cal-date"><span class="cal-month">Apr</span> <span class="cal-day">9–11</span> <span class="cal-year">2027</span></div>
-        <h3 class="cal-name">World of Coffee New Orleans</h3>
-        <div class="cal-where">New Orleans, USA</div>
-        <div class="cal-note">Includes the World Coffee Roasting Championship</div>
-      </article>
-      <article class="cal-event highlight">
-        <div class="cal-date"><span class="cal-month">Apr–May</span> <span class="cal-day">28 / 1</span> <span class="cal-year">2027</span></div>
-        <h3 class="cal-name">★ World of Coffee Tokyo</h3>
-        <div class="cal-where">Tokyo, Japan</div>
-        <div class="cal-note">Host city of the <strong>World Barista Championship 2027</strong></div>
-      </article>
+    <div class="cal-regions">
+
+      <div class="cal-region">
+        <h3 class="cal-region-title">Americas</h3>
+        <ul class="cal-list">
+          <li><span class="cal-country">Colombia</span><span class="cal-when">Apr 30 – May 2, 2026</span></li>
+          <li><span class="cal-country">Canada</span><span class="cal-when">June 12 – 14, 2026</span></li>
+          <li><span class="cal-country">United States</span><span class="cal-when">June 17 – 21, 2026</span></li>
+          <li><span class="cal-country">Panama</span><span class="cal-when">October 22 – 25, 2026</span></li>
+        </ul>
+      </div>
+
+      <div class="cal-region">
+        <h3 class="cal-region-title">Europe</h3>
+        <ul class="cal-list">
+          <li><span class="cal-country">Italy</span><span class="cal-when">January 16 – 20, 2026</span></li>
+          <li><span class="cal-country">Greece</span><span class="cal-when">February 7 – 10, 2026</span></li>
+          <li><span class="cal-country">Switzerland</span><span class="cal-when">February – May, 2026</span></li>
+          <li><span class="cal-country">Germany</span><span class="cal-when">March 13 – 17, 2026</span></li>
+          <li><span class="cal-country">Spain</span><span class="cal-when">March 23 – 26, 2026</span></li>
+          <li><span class="cal-country">United Kingdom</span><span class="cal-when">March – May, 2026</span></li>
+          <li><span class="cal-country">Belgium</span><span class="cal-when">June 25 – 27, 2026</span></li>
+          <li><span class="cal-country">Austria</span><span class="cal-when">September, 2026</span></li>
+          <li><span class="cal-country">France</span><span class="cal-when">September, 2026</span></li>
+        </ul>
+      </div>
+
+      <div class="cal-region">
+        <h3 class="cal-region-title">Middle East &amp; Asia</h3>
+        <ul class="cal-list">
+          <li><span class="cal-country">United Arab Emirates</span><span class="cal-when">January, 2026</span></li>
+          <li><span class="cal-country">China</span><span class="cal-when">March – April, 2026</span></li>
+          <li><span class="cal-country">Vietnam</span><span class="cal-when">March – May, 2026</span></li>
+          <li><span class="cal-country">South Korea</span><span class="cal-when">April 15 – 18, 2026</span></li>
+          <li><span class="cal-country">Singapore</span><span class="cal-when">April – June, 2026</span></li>
+          <li><span class="cal-country">Indonesia</span><span class="cal-when">May, 2026</span></li>
+          <li><span class="cal-country">Thailand</span><span class="cal-when">May 7 – 9, 2026</span></li>
+          <li><span class="cal-country">Japan</span><span class="cal-when">October, 2026</span></li>
+          <li><span class="cal-country">Taiwan</span><span class="cal-when">November, 2026</span></li>
+        </ul>
+      </div>
+
     </div>
 
     <div class="calendar-nationals">
-      <div class="cal-eyebrow-secondary">National & regional qualifiers</div>
-      <p>Many of you will also be competing at home first. We support these too — Hellenic Coffee Championship · Korea Barista Championship · Japan Barista &amp; Brewers Cup · US Brewers Cup &amp; USBC · Italy Barista Championship · and more. <strong>Tell us in your application which one you're targeting.</strong></p>
+      <div class="cal-eyebrow-secondary">Don't see your country?</div>
+      <p>This list reflects the national, regional and international competitions we're tracking for the 2026 cycle. If you're competing somewhere not listed, write the event in your application — we'll work it in.</p>
     </div>
   </div>
 </section>
@@ -1489,7 +1483,7 @@
     </div>
 
     <a href="#" class="btn btn-primary">Start your application</a>
-    <div class="deadline">20 boxes · sized for your category · Apply once</div>
+    <div class="deadline">20 boxes · 6 kilos each · Apply once</div>
   </div>
 </section>
 
@@ -1585,33 +1579,39 @@
           <div class="form-field">
             <label for="target_competition">Which competition are you preparing for? <span class="req">*</span></label>
             <select id="target_competition" name="target_competition" required>
-              <option value="">— Select your target —</option>
-              <optgroup label="World stage">
-                <option value="WBC Tokyo 2027">★ World Barista Championship · Tokyo · April 28 – May 1, 2027</option>
-                <option value="World Brewers Cup Tokyo 2027">World Brewers Cup · Tokyo · April 28 – May 1, 2027</option>
-                <option value="World Coffee Roasting Championship 2027">World Coffee Roasting Championship · New Orleans · April 9–11, 2027</option>
+              <option value="">— Select your country / region —</option>
+              <optgroup label="Americas">
+                <option value="Colombia · Apr 30 – May 2, 2026">Colombia · April 30 – May 2, 2026</option>
+                <option value="Canada · June 12 – 14, 2026">Canada · June 12 – 14, 2026</option>
+                <option value="United States · June 17 – 21, 2026">United States · June 17 – 21, 2026</option>
+                <option value="Panama · Oct 22 – 25, 2026">Panama · October 22 – 25, 2026</option>
               </optgroup>
-              <optgroup label="World of Coffee circuit">
-                <option value="SCAJ Tokyo 2026">SCAJ World Specialty Coffee · Tokyo · October 14–17, 2026</option>
-                <option value="WoC Panama 2026">World of Coffee Panama · October 23–25, 2026</option>
-                <option value="WoC Dubai 2027">World of Coffee Dubai · January 28–29, 2027</option>
-                <option value="WoC New Orleans 2027">World of Coffee New Orleans · April 9–11, 2027</option>
-                <option value="WoC Tokyo 2027">World of Coffee Tokyo · April 28 – May 1, 2027</option>
+              <optgroup label="Europe">
+                <option value="Italy · Jan 16 – 20, 2026">Italy · January 16 – 20, 2026</option>
+                <option value="Greece · Feb 7 – 10, 2026">Greece · February 7 – 10, 2026</option>
+                <option value="Switzerland · Feb–May, 2026">Switzerland · February – May, 2026</option>
+                <option value="Germany · Mar 13 – 17, 2026">Germany · March 13 – 17, 2026</option>
+                <option value="Spain · Mar 23 – 26, 2026">Spain · March 23 – 26, 2026</option>
+                <option value="United Kingdom · Mar–May, 2026">United Kingdom · March – May, 2026</option>
+                <option value="Belgium · Jun 25 – 27, 2026">Belgium · June 25 – 27, 2026</option>
+                <option value="Austria · Sep, 2026">Austria · September, 2026</option>
+                <option value="France · Sep, 2026">France · September, 2026</option>
               </optgroup>
-              <optgroup label="National qualifiers">
-                <option value="USBC 2027">US Barista Championship 2027</option>
-                <option value="US Brewers Cup 2027">US Brewers Cup 2027</option>
-                <option value="Canada Barista 2027">Canadian Barista Championship 2027</option>
-                <option value="Hellenic 2026">Hellenic Coffee Championship 2026</option>
-                <option value="Korea 2026">Korea Barista &amp; Brewers Championship 2026</option>
-                <option value="Japan 2026">Japan Barista &amp; Brewers Cup 2026</option>
-                <option value="Italy 2026">Italy Barista Championship 2026</option>
-                <option value="Colombia 2026">Café de Colombia · Bogotá · November 2026</option>
-                <option value="Other national">Other national / regional competition</option>
+              <optgroup label="Middle East &amp; Asia">
+                <option value="UAE · Jan, 2026">United Arab Emirates · January, 2026</option>
+                <option value="China · Mar–Apr, 2026">China · March – April, 2026</option>
+                <option value="Vietnam · Mar–May, 2026">Vietnam · March – May, 2026</option>
+                <option value="South Korea · Apr 15 – 18, 2026">South Korea · April 15 – 18, 2026</option>
+                <option value="Singapore · Apr–Jun, 2026">Singapore · April – June, 2026</option>
+                <option value="Indonesia · May, 2026">Indonesia · May, 2026</option>
+                <option value="Thailand · May 7 – 9, 2026">Thailand · May 7 – 9, 2026</option>
+                <option value="Japan · Oct, 2026">Japan · October, 2026</option>
+                <option value="Taiwan · Nov, 2026">Taiwan · November, 2026</option>
               </optgroup>
+              <option value="Other (specify in pitch)">Other competition — I'll detail it below</option>
               <option value="Not yet decided">I haven't decided which one yet</option>
             </select>
-            <span class="help">Pick the one you're aiming for. We'll size and ship your lot to land before your training cycle.</span>
+            <span class="help">Pick the country and date range you're competing in. We'll arrange shipping so your lot lands before your training cycle.</span>
           </div>
         </div>
 
