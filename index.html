@@ -133,10 +133,27 @@
   }
   .nav.scrolled { background: rgba(255,255,255,0.96); color: var(--ink); backdrop-filter: blur(8px); }
   .nav-brand { font-family: var(--serif); font-size: 18px; letter-spacing: 0.15em; display: inline-flex; align-items: center; text-decoration: none; color: inherit; }
-  .nav-logo { height: 36px; width: auto; display: block; transition: filter 0.3s; }
-  .nav.scrolled .nav-logo { filter: brightness(0); }
+  .nav-logo {
+    height: clamp(44px, 4.2vw, 60px);
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 3px 14px rgba(155,23,70,0.35)) drop-shadow(0 1px 3px rgba(0,0,0,0.18));
+    transition: filter 0.3s, transform 0.3s;
+  }
+  .nav-logo:hover { transform: scale(1.03); }
+  .nav.scrolled .nav-logo {
+    filter: brightness(0) drop-shadow(0 2px 6px rgba(0,0,0,0.12));
+  }
   .nav-links { display: flex; gap: 32px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; }
-  .nav-links a { color: inherit; text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
+  .nav-links a {
+    color: inherit;
+    text-decoration: none;
+    opacity: 1;
+    font-family: 'Jost', -apple-system, sans-serif;
+    font-weight: 600;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 0.7; }
   .nav-links a:hover { opacity: 1; }
 
   /* ============ HERO — BEAT Invitation 2026 ============ */
@@ -322,8 +339,25 @@
     background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.65) 100%);
   }
   .stage .container { position: relative; z-index: 2; max-width: 760px; }
-  .stage h2 { color: white; }
-  .stage-sub { font-size: 19px; opacity: 0.9; margin-top: 24px; }
+  .stage h2 {
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .stage-sub {
+    font-family: 'Jost', -apple-system, sans-serif;
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.55;
+    margin-top: 28px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #ffffff;
+    opacity: 1;
+    font-weight: 600;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.4);
+  }
 
   /* ============ HOW IT WORKS ============ */
   .how { background: var(--paper); }
@@ -838,7 +872,7 @@
 
     /* STAGE / ORIGIN */
     .stage { padding: 80px 20px; }
-    .stage-sub { font-size: 16px; margin-top: 18px; }
+    .stage-sub { font-size: 16px; margin-top: 20px; line-height: 1.5; }
 
     /* HOW IT WORKS */
     .steps { grid-template-columns: 1fr; }
