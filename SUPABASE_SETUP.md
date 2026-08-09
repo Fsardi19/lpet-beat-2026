@@ -211,3 +211,26 @@ Each of these is a separate sprint — let me know which one you want next.
 
 *Last updated: 27 Apr 2026 · Session 31*
 *Migration file: `referencias/proyectos/landing-beat-2026/migrations/001_beat_submissions.sql` (centro-control, private)*
+
+---
+
+## ⚠️ Migration 003 — required before the 2026/27 form goes live
+
+The landing was rewritten in August 2026 with new eligibility policies. The form now
+sends two fields the table does not have yet:
+
+| Field | Type | Notes |
+|---|---|---|
+| `sponsor_status` | text | Required in the form. Independence / small-business gate. |
+| `consent_content` | boolean | Optional. Permission to publish training and competition content, with credit. |
+
+**Until this migration runs, every submission fails to insert.**
+
+```
+referencias/proyectos/landing-beat-2026/migrations/003_new_policies_2026_27.sql
+```
+
+Three existing columns changed meaning but not type, so they need no migration:
+`national_registration` (now "how many national appearances", required),
+`target_competition` (now free text instead of a fixed 2026 dropdown),
+and `category` (now only `barista` or `brewers_cup`).
