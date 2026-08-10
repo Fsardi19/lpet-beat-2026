@@ -1671,6 +1671,7 @@
             <span class="help">Be straight with us. BEAT is for independents and small businesses. If a large roaster or group is already funding your campaign, this round isn't the one for you.</span>
           </div>
         </div>
+
         <!-- Video: link or upload -->
         <div class="form-row single">
           <div class="form-field">
@@ -1698,6 +1699,67 @@
             </div>
           </div>
         </div>
+
+        <!-- Pitch -->
+        <div class="form-row single">
+          <div class="form-field">
+            <label for="pitch_text">Why BEAT, in your own words <span class="req">*</span></label>
+            <textarea id="pitch_text" name="pitch_text" required minlength="50" maxlength="800" placeholder="What does this craft mean to you? What competition are you preparing for, and why does this coffee fit?"></textarea>
+            <span class="char-count"><span id="pitchCount">0</span> / 800</span>
+          </div>
+        </div>
+
+        <!-- Pro context -->
+        <div class="form-row">
+          <div class="form-field">
+            <label for="current_roastery">Current roastery / cafe</label>
+            <input type="text" id="current_roastery" name="current_roastery" maxlength="120" />
+          </div>
+          <div class="form-field">
+            <label for="past_competitions">Past competitions</label>
+            <input type="text" id="past_competitions" name="past_competitions" maxlength="200" placeholder="e.g. National Barista 2024 (3rd)" />
+          </div>
+        </div>
+
+        <!-- Consent -->
+        <div class="consent-row">
+          <label>
+            <input type="checkbox" id="consent_data" name="consent_data" required />
+            <span>I authorize La Palma &amp; El Tucán to store this submission for the BEAT 2026 contest selection process. <span class="req">*</span></span>
+          </label>
+          <label>
+            <input type="checkbox" id="consent_amplify" name="consent_amplify" />
+            <span>(Optional) I'm happy for LP&amp;ET to share my video on their channels with credit, regardless of contest outcome.</span>
+          </label>
+          <label>
+            <input type="checkbox" id="consent_content" name="consent_content" />
+            <span>(Optional, applies only if I'm selected) I'm happy to share photos, clips and stories from my training and my competition, and for LP&amp;ET to post them with credit to me.</span>
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-submit-row">
+          <small>
+            Applications close <strong>August 31, 2026</strong>. Locked once submitted.<br/>
+            <span style="opacity: 0.75;">For championships between Aug 2026 and Jul 31, 2027. Freight and duties paid by recipient (we handle export &amp; carrier).</span>
+          </small>
+          <button type="submit" class="form-submit" id="submitBtn">Send application</button>
+        </div>
+
+        <div class="form-message error" id="errorMsg"></div>
+      </form>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="form-success-state" id="successState">
+      <div class="success-mark">✓</div>
+      <h3>Application received.</h3>
+      <p>You'll hear from the BEAT jury within 14 days at the email you provided. In the meantime, follow <strong>@lapalmayeltucan</strong> for updates and the public voting round.</p>
+      <p style="margin-top: 20px; font-size: 13px; opacity: 0.7;">— <em>Felipe &amp; the LP&amp;ET team</em></p>
+    </div>
+
+  </div>
+</div>
 
 <!-- ============================================================ -->
 <!-- SUPABASE CLIENT (CDN) -->
