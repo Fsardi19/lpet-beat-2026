@@ -570,6 +570,21 @@
   }
 
 
+
+  /* ---- National appearances: a count, then one box per appearance ---- */
+  .nat-count { max-width: 160px; }
+  .nat-list { margin-top: 14px; display: grid; gap: 10px; }
+  .nat-list:empty { margin-top: 0; }
+  .nat-row { display: flex; align-items: center; gap: 12px; }
+  .nat-num {
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    color: var(--accent); background: rgba(196,30,92,0.08);
+  }
+  .nat-row input { flex: 1; }
+  .nat-hint { margin-top: 10px; font-size: 12px; color: #6a6a6a; }
+
   /* ---- Video: paste a link or upload the file ---- */
   .vid-tabs { display: flex; gap: 0; margin-bottom: 14px; }
   .vid-tab {
@@ -589,6 +604,9 @@
   .vid-check.busy { color: #6a6a6a; }
 
   .vid-drop {
+    display: block;                 /* un <label> es inline por defecto: sin esto
+                                       el borde punteado se parte en trozos */
+    width: 100%; box-sizing: border-box;
     border: 1px dashed var(--line-soft); border-radius: var(--radius);
     padding: 26px 18px; text-align: center; cursor: pointer;
     transition: border-color .2s, background .2s;
@@ -1657,9 +1675,12 @@
         <!-- National attempts -->
         <div class="form-row single">
           <div class="form-field">
-            <label for="national_registration">How many times have you competed at national level? <span class="req">*</span></label>
-            <input type="text" id="national_registration" name="national_registration" required maxlength="200" placeholder="e.g. Twice — 2023 and 2025 nationals" />
+            <label for="national_count">How many times have you competed at national level? <span class="req">*</span></label>
+            <input type="number" id="national_count" class="nat-count" min="0" max="15" step="1" inputmode="numeric" placeholder="e.g. 3" />
             <span class="help">This round is for competitors with at least two national appearances behind them. Regionals and qualifiers on the way to a national are fine, but the national is what we're counting.</span>
+            <div class="nat-list" data-nat-list></div>
+            <div class="nat-hint" data-nat-hint></div>
+            <input type="hidden" id="national_registration" name="national_registration" />
           </div>
         </div>
 
@@ -1892,7 +1913,15 @@
     if (!country) { showError('Please enter your country.'); return; }
     if (!cat) { showError('Please select a category — Barista or Brewers Cup.'); return; }
     if (!targetComp) { showError('Please tell us which championship you\'re preparing for, and roughly when.'); return; }
-    if (!nationalReg) { showError('Please tell us how many times you have competed at national level.'); return; }
+    var natCount = parseInt((document.getElementById('national_count') || {}).value, 10);
+    if (isNaN(natCount)) { showError('Please tell us how many times you have competed at national level.'); return; }
+    var natItems = document.querySelectorAll('[data-nat-item]');
+    var natEmpty = 0;
+    natItems.forEach(function (i) { if (!i.value.trim()) natEmpty++; });
+    if (natEmpty > 0) {
+      showError('Please name ' + (natEmpty === 1 ? 'the remaining championship' : 'all ' + natCount + ' championships') + ' — or lower the number if you miscounted.');
+      return;
+    }
     if (!sponsorStatus) { showError('Please tell us who covers your competition costs today.'); return; }
     if (BEAT_VIDEO.mode === 'upload') {
       if (BEAT_VIDEO.uploading) { showError('Your video is still uploading — give it a moment.'); return; }
@@ -2003,6 +2032,54 @@
   }
 })();
 
+
+
+/* ---- National appearances: type a number, get that many boxes to name them ---- */
+(function () {
+  var count = document.getElementById('national_count');
+  var list  = document.querySelector('[data-nat-list]');
+  var hint  = document.querySelector('[data-nat-hint]');
+  var hidden = document.getElementById('national_registration');
+  if (!count || !list) return;
+
+  var MAX = 15;
+
+  function build() {
+    var n = parseInt(count.value, 10);
+    if (isNaN(n) || n < 0) n = 0;
+    if (n > MAX) { n = MAX; count.value = MAX; }
+
+    var current = list.querySelectorAll('.nat-row').length;
+    // keep what is already typed: only add or remove the difference
+    for (var i = current; i < n; i++) {
+      var row = document.createElement('div');
+      row.className = 'nat-row';
+      row.innerHTML = '<span class="nat-num">' + (i + 1) + '</span>' +
+        '<input type="text" maxlength="120" data-nat-item ' +
+        'placeholder="Championship and year — e.g. Colombia Barista Championship 2023" />';
+      list.appendChild(row);
+    }
+    for (var j = current; j > n; j--) list.removeChild(list.lastChild);
+
+    if (n === 0) hint.textContent = '';
+    else if (n === 1) hint.textContent = 'One appearance. BEAT 2026/27 asks for at least two — you can still apply, but tell us in your pitch why this round fits you.';
+    else hint.textContent = 'Name each one, oldest first. Year and country are enough.';
+    sync();
+  }
+
+  function sync() {
+    var items = list.querySelectorAll('[data-nat-item]');
+    var named = [];
+    items.forEach(function (i) { if (i.value.trim()) named.push(i.value.trim()); });
+    var n = parseInt(count.value, 10);
+    hidden.value = (isNaN(n) ? '' : n + (n === 1 ? ' national appearance' : ' national appearances'))
+      + (named.length ? ' — ' + named.join('; ') : '');
+  }
+
+  count.addEventListener('input', build);
+  count.addEventListener('change', build);
+  list.addEventListener('input', sync);
+})();
 
 /* ---- Video field: paste a link (checked) or upload to Supabase Storage ---- */
 var BEAT_VIDEO = { mode: 'link', linkOk: false, uploadedPath: null, uploading: false };
