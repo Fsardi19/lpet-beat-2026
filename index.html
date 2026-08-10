@@ -2210,7 +2210,10 @@ var BEAT_VIDEO = { mode: 'link', linkOk: false, uploadedPath: null, uploading: f
     xhr.onload = function () {
       BEAT_VIDEO.uploading = false;
       if (xhr.status >= 200 && xhr.status < 300) {
-        BEAT_VIDEO.uploadedPath = 'beat-videos/' + path;
+        /* Full URL, not the bare storage path: video_url has a CHECK for
+           ^https?:// and a path like "beat-videos/foo.mp4" fails it. The
+           bucket is private, so this only opens for the admin emails. */
+        BEAT_VIDEO.uploadedPath = SUPABASE_URL + '/storage/v1/object/beat-videos/' + path;
         bar.style.width = '100%';
         say(status, '\u2713 Uploaded. You can send your application now.', 'ok');
       } else {
