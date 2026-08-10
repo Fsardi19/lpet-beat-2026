@@ -569,41 +569,96 @@
     font-style: italic;
   }
 
-  /* ---- Compact grid (replaces the year-by-year timeline) ---- */
+  /* ---- Interactive timeline — same design as "Our Story" on Shopify ---- */
   .wof-grid {
-    max-width: 880px; margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
   }
+  .wof-track-line,
+  .wof-track-progress {
+    position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 3px; transform: translateX(-50%);
+  }
+  .wof-track-line { background: var(--gold-soft); opacity: 0.45; }
+  .wof-track-progress {
+    background: var(--gold);
+    height: 0%;
+    transition: height 0.1s linear;
+    transform-origin: top;
+  }
+
   .wof-card {
-    display: flex; align-items: center; gap: 36px;
-    text-align: left;
-    padding: 28px 0;
-    border-bottom: 1px solid rgba(184,144,96,0.22);
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 56px;
+    align-items: center;
+    padding: 40px 0;
   }
-  .wof-card:last-child { border-bottom: none; }
-  .wof-card .wof-portrait {
-    width: 280px; height: 280px;
-    margin: 0;
+  .wof-card:nth-child(odd)  .wof-portrait  { grid-column: 1; grid-row: 1; justify-self: end; }
+  .wof-card:nth-child(odd)  .wof-card-info { grid-column: 2; grid-row: 1; text-align: left; }
+  .wof-card:nth-child(even) .wof-portrait  { grid-column: 2; grid-row: 1; justify-self: start; }
+  .wof-card:nth-child(even) .wof-card-info { grid-column: 1; grid-row: 1; text-align: right; }
+
+  .wof-marker {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%); z-index: 2;
   }
-  .wof-card-info { max-width: none; margin: 0; }
-  .wof-card-year {
-    font-size: 11px; letter-spacing: 0.24em;
-    color: var(--gold); opacity: 0.75;
-    margin-bottom: 6px;
+  .wof-dot {
+    display: block; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--paper); border: 2px solid var(--gold-soft);
+    transition: background .4s ease, border-color .4s ease, transform .4s ease;
   }
-  .wof-card-info .name {
-    font-family: var(--serif);
-    font-size: 18px; color: #1a1a1a;
-    line-height: 1.2; margin-bottom: 6px;
+  .wof-card.is-visible .wof-dot {
+    background: var(--gold); border-color: var(--gold); transform: scale(1.15);
   }
-  .wof-card-info .achievement {
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold); line-height: 1.5; margin-bottom: 5px;
+
+  .wof-card .wof-card-year {
+    position: absolute; left: 50%; top: 8px; transform: translateX(-50%);
+    font-size: 13px; letter-spacing: 0.14em; font-weight: 700;
+    color: var(--gold); background: var(--paper);
+    padding: 3px 12px; margin: 0; opacity: 0; z-index: 2;
+    transition: opacity .6s ease .1s;
   }
-  .wof-card-info .place {
-    font-size: 12px; color: #6a6a6a; font-style: italic; line-height: 1.5;
+  .wof-card.is-visible .wof-card-year { opacity: 1; }
+
+  .wof-card .wof-portrait,
+  .wof-card .wof-card-info {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .wof-card.is-visible .wof-portrait  { opacity: 1; transform: translateY(0); }
+  .wof-card.is-visible .wof-card-info { opacity: 1; transform: translateY(0); transition-delay: .12s; }
+
+  .wof-card .wof-portrait { width: 300px; height: 300px; margin: 0; }
+  .wof-card-info { max-width: 320px; }
+  .wof-card:nth-child(even) .wof-card-info { margin-left: auto; }
+
+  /* ---- 2019 world champion: the one the mural blows up in rose ---- */
+  .wof-card.is-champion { padding: 64px 0; }
+  .wof-card.is-champion .wof-portrait {
+    width: 420px; height: 420px;
+    border-width: 4px;
+    border-color: var(--accent);
+    box-shadow: 0 10px 48px rgba(196,30,92,0.28);
+  }
+  .wof-card.is-champion .wof-dot {
+    width: 20px; height: 20px; border-color: var(--accent);
+  }
+  .wof-card.is-champion.is-visible .wof-dot { transform: scale(1.3); }
+  .wof-card.is-champion .wof-card-info { max-width: 380px; }
+  .wof-card.is-champion .wof-card-info .name {
+    font-size: 30px; color: var(--accent-deep);
+  }
+  .wof-card.is-champion .wof-card-info .achievement {
+    color: var(--accent); font-weight: 700; font-size: 12px;
+  }
+  .wof-champion-tag {
+    display: inline-block; margin-bottom: 10px;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paper); background: var(--accent);
+    padding: 4px 12px; border-radius: 100px;
   }
 
   .wof-footer {
@@ -924,8 +979,18 @@
     .wof-champion-info { text-align: center; max-width: 100%; }
     .wof-champion-info .name { font-size: 18px; }
     .wof-portrait { width: 96px; height: 96px; }
-    .wof-card { flex-direction: column; gap: 18px; text-align: center; padding: 24px 0; }
-    .wof-card .wof-portrait { width: 220px !important; height: 220px !important; }
+    .wof-track-line, .wof-track-progress { left: 18px; }
+    .wof-card { grid-template-columns: 1fr; padding: 30px 0 30px 52px; }
+    .wof-card:nth-child(odd) .wof-portrait,
+    .wof-card:nth-child(even) .wof-portrait { grid-column: 1; grid-row: 1; justify-self: start; }
+    .wof-card:nth-child(odd) .wof-card-info,
+    .wof-card:nth-child(even) .wof-card-info {
+      grid-column: 1; grid-row: 2; text-align: left; margin: 18px 0 0; max-width: 100%;
+    }
+    .wof-card .wof-portrait { width: 200px !important; height: 200px !important; }
+    .wof-card.is-champion .wof-portrait { width: 240px !important; height: 240px !important; }
+    .wof-marker { left: 18px; }
+    .wof-card .wof-card-year { left: 18px; top: -6px; transform: none; padding: 2px 8px; }
     .wof-portrait[style*="width:140px"] { width: 110px !important; height: 110px !important; }
     .wof-footer { font-size: 10px !important; letter-spacing: 0.2em !important; padding: 0 8px; }
     .wof-footer .countries { word-break: break-word; line-height: 1.8; }
@@ -1204,212 +1269,215 @@
     </p>
   </div>
 
-  <div class="wof-grid">
-    <div class="wof-card">
+  <div class="wof-grid" data-wof-timeline>
+    <div class="wof-track-line"></div>
+    <div class="wof-track-progress" data-wof-progress></div>
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2016</div>
       <div class="wof-portrait"><img src="assets/wof/regina-tay.jpg" alt="Regina Tay Singapore Barista Champion 2016" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2016</div>
         <div class="name">Regina Tay</div>
         <div class="achievement">Singapore Barista Champion · WBC Dublin</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
-      <div class="wof-portrait" style="background:#222;"><img src="assets/wof/stefanos-paterakis.jpg" alt="Stefanos Paterakis Greece Barista Champion 2016" /></div>
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2016</div>
+      <div class="wof-portrait"><img src="assets/wof/stefanos-paterakis.jpg" alt="Stefanos Paterakis Greece Barista Champion 2016" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2016</div>
         <div class="name">Stefanos Paterakis</div>
         <div class="achievement">Greece Barista Champion · WBC Dublin</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
-      <div class="wof-portrait" style="background:#222;"><img src="assets/wof/dane-oliver.jpg" alt="Dane Oliver Denmark Brewers Cup Champion 2016" /></div>
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2016</div>
+      <div class="wof-portrait"><img src="assets/wof/dane-oliver.jpg" alt="Dane Oliver Denmark Brewers Cup Champion 2016" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2016</div>
         <div class="name">Dane Oliver</div>
         <div class="achievement">Denmark Brewers Cup Champion</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
-      <div class="wof-portrait" style="background:#222;"><img src="assets/wof/lise-marie-romo.jpg" alt="Lise Marie Rømo Norway Barista Champion 2016" /></div>
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2016</div>
+      <div class="wof-portrait"><img src="assets/wof/lise-marie-romo.jpg" alt="Lise Marie Rømo Norway Barista Champion 2016" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2016</div>
         <div class="name">Lise Marie Rømo</div>
         <div class="achievement">Norway Barista Champion · WBC Dublin</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2017</div>
       <div class="wof-portrait"><img src="assets/wof/dylan-siemens.jpg" alt="Dylan Siemens US Brewers Cup Champion 2017 Onyx Coffee Lab" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2017</div>
         <div class="name">Dylan Siemens</div>
         <div class="achievement">US Brewers Cup Champion</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2017</div>
       <div class="wof-portrait"><img src="assets/wof/mark-michaelson.jpg" alt="Mark Michaelson US Roaster Champion 2017 Onyx Coffee Lab" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2017</div>
         <div class="name">Mark Michaelson</div>
         <div class="achievement">US Roaster Champion</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2017</div>
       <div class="wof-portrait"><img src="assets/wof/francesco-masciullo.jpg" alt="Francesco Masciullo Italy Barista Champion WBC Finalist Seoul 2017" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2017</div>
         <div class="name">Francesco Masciullo</div>
         <div class="achievement">Italy Barista Champion · WBC Seoul Finalist</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2018</div>
       <div class="wof-portrait"><img src="assets/wof/cole-torode-canadian-2018.jpg" alt="Cole Torode Canadian Barista Champion WBC Finalist Amsterdam 2018" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2018</div>
         <div class="name">Cole Torode</div>
         <div class="achievement">Canada Barista Champion · WBC Amsterdam Finalist</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2018</div>
       <div class="wof-portrait"><img src="assets/wof/tom-kuyken.jpg" alt="Tom Kuyken Norway Brewers Cup Champion 2018" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2018</div>
         <div class="name">Tom Kuyken</div>
         <div class="achievement">Norway Brewers Cup Champion</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2018</div>
       <div class="wof-portrait"><img src="assets/wof/craig-simon.jpg" alt="Craig Simon Australia Barista Champion WBC Semi-finalist Amsterdam 2018" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2018</div>
         <div class="name">Craig Simon</div>
         <div class="achievement">Australia Barista Champion · WBC Amsterdam Semi-finalist</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2018</div>
       <div class="wof-portrait"><img src="assets/wof/sebastian-villamizar.jpg" alt="Sebastián Villamizar Colombia at World Brewers Cup Belo Horizonte 2018" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2018</div>
         <div class="name">Sebastián Villamizar</div>
         <div class="achievement">Colombia at World Brewers Cup · Belo Horizonte</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
-      <div class="wof-portrait" style="width:140px; height:140px;"><img src="assets/wof/jooyeon-jeon.jpg" alt="Jooyeon Jeon World Barista Champion 2019 Boston" /></div>
+    <div class="wof-card is-champion" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2019</div>
+      <div class="wof-portrait"><img src="assets/wof/jooyeon-jeon.jpg" alt="Jooyeon Jeon World Barista Champion 2019 Boston" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2019</div>
+        <span class="wof-champion-tag">World Champion</span>
         <div class="name">Jooyeon Jeon</div>
         <div class="achievement">★ World Barista Champion</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2019</div>
       <div class="wof-portrait"><img src="assets/wof/cole-torode-2019.jpg" alt="Cole Torode WBC 2019 Boston Third Place" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2019</div>
         <div class="name">Cole Torode</div>
         <div class="achievement">WBC Boston · 3rd Place</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2019</div>
       <div class="wof-portrait"><img src="assets/wof/sam-spillman.jpg" alt="Samantha Spillman US Barista Champion 2019" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2019</div>
         <div class="name">Samantha Spillman</div>
         <div class="achievement">★ US Barista Champion</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2019</div>
       <div class="wof-portrait"><img src="assets/wof/dylan-siemens.jpg" alt="Dylan Siemens US Barista Championship Finalist 2019 Onyx Coffee Lab" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2019</div>
         <div class="name">Dylan Siemens</div>
         <div class="achievement">US Barista Championship · Finalist</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
-      <div class="wof-portrait" style="background:#222;"><img src="assets/wof/t-ben-fischer.jpg" alt="T. Ben Fischer US Barista Championship finalist 2019" style="object-position:65% center;" /></div>
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2019</div>
+      <div class="wof-portrait"><img src="assets/wof/t-ben-fischer.jpg" alt="T. Ben Fischer US Barista Championship finalist 2019" style="object-position:65% center;" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2019</div>
         <div class="name">T. Ben Fischer</div>
         <div class="achievement">US Barista Championship · Finalist</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2020</div>
       <div class="wof-portrait"><img src="assets/wof/cole-torode-2020.jpg" alt="Cole Torode Canada Barista Championship Finalist 2020" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2020</div>
         <div class="name">Cole Torode</div>
         <div class="achievement">Canada Barista Championship · Finalist</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2020</div>
       <div class="wof-portrait"><img src="assets/wof/sam-neely.jpg" alt="Sam Neely US Barista Championship Finalist 2020 Amethyst Coffee" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2020</div>
         <div class="name">Sam Neely</div>
         <div class="achievement">US Barista Championship · Finalist</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
-      <div class="wof-portrait" style="background:#222;"><img src="assets/wof/elika-liftee.jpg" alt="Elika Liftee US Brewers Cup Champion 2022" /></div>
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2022</div>
+      <div class="wof-portrait"><img src="assets/wof/elika-liftee.jpg" alt="Elika Liftee US Brewers Cup Champion 2022" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2022</div>
         <div class="name">Elika Liftee</div>
         <div class="achievement">★ US Brewers Cup Champion · World 2nd · Melbourne</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2024</div>
       <div class="wof-portrait"><img src="assets/wof/gray-kauffman-2025.jpg" alt="Gray Kauffman 2024 USBC qualification cycle training" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2024</div>
         <div class="name">Gray Kauffman</div>
         <div class="achievement">USBC Qualification Cycle · Training</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2025</div>
       <div class="wof-portrait"><img src="assets/wof/gray-kauffman-2025.jpg" alt="Gray Kauffman US Barista Championship Semi-finalist 2025" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2025</div>
         <div class="name">Gray Kauffman</div>
         <div class="achievement">US Barista Championship · Semi-finalist</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
-      <div class="wof-portrait" style="background:#222;"><img src="assets/wof/fanie-botes.png" alt="Fanie Botes KZN Regional Barista Championship 1st place 2025" /></div>
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2025</div>
+      <div class="wof-portrait"><img src="assets/wof/fanie-botes.png" alt="Fanie Botes KZN Regional Barista Championship 1st place 2025" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2025</div>
         <div class="name">Fanie Botes</div>
         <div class="achievement">KZN Regional Barista Championship · 1st</div>
-        <div class="place"></div>
       </div>
     </div>
-    <div class="wof-card">
-      <div class="wof-portrait" style="background:#222;"><img src="assets/wof/luhle-mnyanda.png" alt="Luhle Mnyanda KZN Regional Barista Championship 2nd place 2025" /></div>
+    <div class="wof-card" data-wof-item>
+      <div class="wof-marker"><span class="wof-dot"></span></div>
+      <div class="wof-card-year">2025</div>
+      <div class="wof-portrait"><img src="assets/wof/luhle-mnyanda.png" alt="Luhle Mnyanda KZN Regional Barista Championship 2nd place 2025" /></div>
       <div class="wof-card-info">
-        <div class="wof-card-year">2025</div>
         <div class="name">Luhle Mnyanda</div>
         <div class="achievement">KZN Regional Barista Championship · 2nd</div>
-        <div class="place"></div>
       </div>
     </div>
   </div>
@@ -1831,6 +1899,41 @@
     errorMsg.classList.add('show');
   }
   function nullable(v) { v = (v || '').trim(); return v === '' ? null : v; }
+
+
+/* ---- Wall of Fame timeline: dots light up and the line fills on scroll ---- */
+(function () {
+  var track = document.querySelector('[data-wof-timeline]');
+  if (!track) return;
+  var items = track.querySelectorAll('[data-wof-item]');
+  var progress = track.querySelector('[data-wof-progress]');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (i) { i.classList.add('is-visible'); });
+  } else {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.target.classList.toggle('is-visible', e.isIntersecting); });
+    }, { rootMargin: '0px 0px -15% 0px', threshold: 0.15 });
+    items.forEach(function (i) { obs.observe(i); });
+  }
+
+  if (progress && !reduce) {
+    var ticking = false;
+    function update() {
+      var r = track.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var pct = (vh * 0.55 - r.top) / r.height;
+      progress.style.height = (Math.min(1, Math.max(0, pct)) * 100) + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+})();
 
   /* ---- Nav background on scroll ---- */
   window.addEventListener('scroll', () => {
