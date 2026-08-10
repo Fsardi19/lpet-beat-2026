@@ -2182,12 +2182,41 @@ var BEAT_VIDEO = { mode: 'link', linkOk: false, uploadedPath: null, uploading: f
   });
   fileEl.addEventListener('change', function () { if (fileEl.files[0]) upload(fileEl.files[0]); });
 
+  /* Turns "Jhonatán Benavides" into "jhonatan-benavides" so the stored file
+     says who it belongs to. Without this every upload lands as a timestamp
+     and nobody can tell one competitor's video from another's. */
+  function slug(s) {
+    /* Nordic and central-european letters are not accents: NFD leaves them
+       alone and they'd be dropped, turning "Rømo" into "r-mo". This round has
+       Norwegian and Danish competitors, so map them first. */
+    var LETTERS = { 'ø':'o','æ':'ae','å':'a','ß':'ss','đ':'d','ð':'d','ł':'l','þ':'th','œ':'oe','ı':'i' };
+    return (s || '')
+      .toLowerCase()
+      .replace(/[øæåßđðłþœı]/g, function (c) { return LETTERS[c]; })
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 40);
+  }
+
   function upload(file) {
     BEAT_VIDEO.uploadedPath = null;
     if (file.size > MAX) {
       say(status, 'That file is ' + (file.size / 1048576).toFixed(0) + ' MB. The limit is 200 MB — export it smaller, or paste a link instead.', 'bad');
       return;
     }
+
+    /* The name is what makes the file identifiable later, so ask for it first
+       rather than storing an anonymous blob. */
+    var who = slug((document.getElementById('full_name') || {}).value);
+    if (!who) {
+      say(status, 'Please fill in your full name at the top first — we name the file after you so we can tell whose video it is.', 'bad');
+      fileEl.value = '';
+      var nameEl = document.getElementById('full_name');
+      if (nameEl) { nameEl.focus(); nameEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      return;
+    }
+
     dropT.textContent = file.name;
     progW.classList.add('is-on');
     bar.style.width = '0%';
@@ -2195,7 +2224,12 @@ var BEAT_VIDEO = { mode: 'link', linkOk: false, uploadedPath: null, uploading: f
     BEAT_VIDEO.uploading = true;
 
     var ext = (file.name.split('.').pop() || 'mp4').toLowerCase().replace(/[^a-z0-9]/g, '');
-    var path = 'submissions/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
+    var cat = slug(getSelectedCategory());
+    var stamp = new Date().toISOString().slice(0, 10);
+    var rand = Math.random().toString(36).slice(2, 6);
+    /* 2026-08-10_jhonatan-benavides_barista_a1b2.mp4 — sortable by date,
+       searchable by name, and the suffix keeps two files from colliding. */
+    var path = 'submissions/' + stamp + '_' + who + (cat ? '_' + cat : '') + '_' + rand + '.' + ext;
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', SUPABASE_URL + '/storage/v1/object/beat-videos/' + path, true);
