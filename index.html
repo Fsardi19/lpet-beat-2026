@@ -302,34 +302,6 @@
     line-height: 1.15;
     letter-spacing: 0;
   }
-  .why-stat-row {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 32px; margin-top: 64px;
-    padding-top: 48px; border-top: 1px solid var(--line);
-  }
-  .why-stat .num {
-    font-family: var(--serif);
-    font-size: 56px; line-height: 1; color: var(--accent);
-    margin-bottom: 12px;
-  }
-  .why-stat .label {
-    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
-    opacity: 0.7;
-  }
-  .why-quote {
-    font-family: var(--serif);
-    font-size: 24px; line-height: 1.5;
-    margin: 48px 0;
-    padding: 32px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    color: var(--ink);
-  }
-  .why-quote-author {
-    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
-    opacity: 0.6; margin-top: 16px;
-    font-family: var(--sans);
-  }
 
   /* ============ STAGE (background section) ============ */
   .stage {
@@ -602,6 +574,37 @@
     font-style: italic;
   }
 
+  /* ---- Compact grid (replaces the year-by-year timeline) ---- */
+  .wof-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 40px 24px;
+  }
+  .wof-card { text-align: center; }
+  .wof-card .wof-portrait {
+    width: 104px; height: 104px;
+    margin: 0 auto 16px;
+  }
+  .wof-card-info { max-width: 220px; margin: 0 auto; }
+  .wof-card-year {
+    font-size: 11px; letter-spacing: 0.24em;
+    color: var(--gold); opacity: 0.75;
+    margin-bottom: 6px;
+  }
+  .wof-card-info .name {
+    font-family: var(--serif);
+    font-size: 18px; color: #1a1a1a;
+    line-height: 1.2; margin-bottom: 6px;
+  }
+  .wof-card-info .achievement {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); line-height: 1.5; margin-bottom: 5px;
+  }
+  .wof-card-info .place {
+    font-size: 12px; color: #6a6a6a; font-style: italic; line-height: 1.5;
+  }
+
   .wof-footer {
     text-align: center;
     margin-top: 48px;
@@ -871,9 +874,6 @@
     .section-eyebrow { font-size: 10px; letter-spacing: 0.3em; }
 
     /* WHY */
-    .why-stat-row { grid-template-columns: 1fr; gap: 20px; padding-top: 32px; margin-top: 40px; }
-    .why-stat .num { font-size: 40px; }
-    .why-quote { font-size: 17px; line-height: 1.5; padding: 24px 0; margin: 32px 0; }
 
     /* STAGE / ORIGIN */
     .stage { padding: 80px 20px; }
@@ -967,7 +967,6 @@
     .form-submit-row small { font-size: 11px; }
 
     .wof-title { font-size: clamp(32px, 11vw, 48px); }
-    .why-quote { font-size: 16px; }
   }
 
   /* ============ ANIMATIONS ============ */
@@ -1043,32 +1042,13 @@
 <section class="why" id="why">
   <div class="container">
     <div class="section-eyebrow">Why BEAT exists</div>
-    <h2 class="section-title">Competing has never been more expensive.<br/>The coffees worth it, further out of reach.</h2>
-    <p class="section-lede">The average barista on the World stage spent $10,000–$12,000 of their own money in 2025 — <em>before even buying their competition coffee</em>. The cost of pursuing a craft has multiplied. Sponsors and roaster partners do incredible work. We want to do our part too.</p>
-
-    <div class="why-stat-row">
-      <div class="why-stat">
-        <div class="num">$10–12K</div>
-        <div class="label">Average barista campaign cost · 2025 (excludes coffee)</div>
-      </div>
-      <div class="why-stat">
-        <div class="num">€5,000</div>
-        <div class="label">Total prize money for the World Barista Champion</div>
-      </div>
-      <div class="why-stat">
-        <div class="num">23</div>
-        <div class="label">Champions &amp; finalists who chose LP&amp;ET on stage since 2016</div>
-      </div>
-    </div>
-
-    <blockquote class="why-quote">
-      When Regina Tay brewed for Singapore at the 2016 WBC, she used our coffee. So did Stefanos Paterakis for Greece. So did Lise Marie Rømo for Norway. Over the next decade, more than twenty champions and finalists from a dozen countries have brewed La Palma &amp; El Tucán on the world's biggest stages.
-    </blockquote>
+    <h2 class="section-title">Competing has quietly become<br/>a question of who can afford it.</h2>
+    <p class="section-lede">A barista on the world stage spent somewhere between ten and twelve thousand dollars of their own money last year, before buying a single gram of competition coffee. The World Barista Champion takes home five thousand euros. Do that arithmetic and you can see what the circuit is slowly selecting for. Not the best palate. The best funded.</p>
 
     <div style="margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--line); max-width: 720px;">
       <h3 style="font-family: var(--serif); font-size: 28px; line-height: 1.25; margin-bottom: 24px; color: var(--ink); font-weight: 400;">A thank-you note, written in green coffee.</h3>
-      <p style="font-size: 17px; line-height: 1.7; color: var(--ink); margin-bottom: 18px;">BEAT exists because the specialty coffee industry took a chance on us when we were a young finca with one ferment tank, no auction record, and a Sidra varietal nobody outside Cundinamarca had heard of. The roasters who paid a fair price for our first lots. The competitors who put our coffees on their cards, very often out of their own pocket. They built this farm with us.</p>
-      <p style="font-size: 17px; line-height: 1.7; color: var(--ink);">This is the most direct way we know of saying thank you: our best lots, given to the people who keep going back without anyone covering the bill.</p>
+      <p style="font-size: 17px; line-height: 1.7; color: var(--ink); margin-bottom: 18px;">We know which side of that we were on. Competitors put our coffee on their cards when nobody was paying them to, back when we were a young finca with one ferment tank, no auction record, and a varietal nobody outside Cundinamarca had heard of. Roasters paid a fair price for our first lots before we had anything to show for it. They built this farm with us.</p>
+      <p style="font-size: 17px; line-height: 1.7; color: var(--ink);">So BEAT is not charity. It is returning something to a system that is tilting, and it goes to the people the tilt hits hardest: the ones who keep going back with nobody covering the bill.</p>
       <p style="font-size: 22px; line-height: 1.4; color: var(--ink); font-family: var(--serif); margin-top: 36px; font-style: italic;">20 boxes. 6 kilos each. No bidding war. Just craft.</p>
     </div>
 
@@ -1128,7 +1108,7 @@
 
       <aside class="rubric-aside">
         <h4>No rules on gender, age or nationality</h4>
-        <p>None. What we do weigh, when it comes down to two applications and one box, is whether you have a sponsorship structure behind you and how hard it is to get competition grade coffee where you live.</p>
+        <p>None. And when it comes down to two applications and one box, we lean toward the competitor with less support behind them.</p>
         <p>Missed the window? We open another twenty boxes for the following season.</p>
         <div class="signature">— BEAT · 2026/27</div>
       </aside>
@@ -1225,286 +1205,229 @@
     <h2 class="wof-title">Wall <span class="gold">of</span> Fame</h2>
     <div class="wof-divider"></div>
     <p class="wof-tagline">
-      A tribute to the dedication and mastery of those who have carried the spirit of Colombian coffee to the world's most prestigious stages.
+      Twenty-three champions and finalists have chosen La Palma &amp; El Tucán on the world's biggest stages since 2016. A tribute to the dedication and mastery of those who have carried the spirit of Colombian coffee that far.
     </p>
     <p class="wof-tagline-es">
       Un tributo a la disciplina y al esfuerzo de quienes han honrado el café especial colombiano en competencias alrededor del mundo.
     </p>
   </div>
 
-  <div class="wof-timeline">
-
-    <!-- 2016 — 4 champions -->
-    <div class="wof-year-block">
-      <div class="wof-year-content">
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/regina-tay.jpg" alt="Regina Tay Singapore Barista Champion 2016" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">Singapore Barista Champion · WBC Dublin</div>
-            <div class="name">Regina Tay</div>
-            <div class="place">Geisha · Lactic Process · Independent</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait" style="background:#222;"><img src="assets/heroes-brick-2nd-place.jpg" alt="Stefanos Paterakis Greece Barista Champion 2016" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">Greece Barista Champion · WBC Dublin</div>
-            <div class="name">Stefanos Paterakis</div>
-            <div class="place">Sidra · Lactic Process · TAF Coffee</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait" style="background:#222;"><img src="assets/hong-kong-2016.jpg" alt="Dane Oliver Denmark Brewers Cup Champion 2016" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">Denmark Brewers Cup Champion</div>
-            <div class="name">Dane Oliver</div>
-            <div class="place">Geisha · Lactic Honey · La Cabra Coffee Roasters</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait" style="background:#222;"><img src="assets/wof/sam-neely.jpg" alt="Lise Marie Rømo Norway Barista Champion 2016" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">Norway Barista Champion · WBC Dublin</div>
-            <div class="name">Lise Marie Rømo</div>
-            <div class="place">Castillo · Lactic Process · Java Espressobar / Kaffa</div>
-          </div>
-        </div>
-      </div>
-      <div class="wof-year-marker">2016</div>
-      <div class="wof-year-empty"></div>
-    </div>
-
-    <!-- 2017 — Onyx Coffee Lab takes over US -->
-    <div class="wof-year-block">
-      <div class="wof-year-empty"></div>
-      <div class="wof-year-marker">2017</div>
-      <div class="wof-year-content">
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/onyx-champions.jpg" alt="Dylan Siemens US Brewers Cup Champion 2017 Onyx Coffee Lab" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">US Brewers Cup Champion</div>
-            <div class="name">Dylan Siemens</div>
-            <div class="place">Geisha · Lactic Process · <strong>Onyx Coffee Lab</strong></div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/onyx-champions.jpg" alt="Mark Michaelson US Roaster Champion 2017 Onyx Coffee Lab" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">US Roaster Champion</div>
-            <div class="name">Mark Michaelson</div>
-            <div class="place">Geisha Natural Lactic · <strong>Onyx Coffee Lab</strong></div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/craig-simon.jpg" alt="Francesco Masciullo Italy Barista Champion WBC Finalist Seoul 2017" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">Italy Barista Champion · WBC Seoul Finalist</div>
-            <div class="name">Francesco Masciullo</div>
-            <div class="place">Geisha &amp; Sidra · Lactic · Ditta Artigianale</div>
-          </div>
-        </div>
+  <div class="wof-grid">
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/wof/regina-tay.jpg" alt="Regina Tay Singapore Barista Champion 2016" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2016</div>
+        <div class="name">Regina Tay</div>
+        <div class="achievement">Singapore Barista Champion · WBC Dublin</div>
+        <div class="place"></div>
       </div>
     </div>
-
-    <!-- 2018 -->
-    <div class="wof-year-block">
-      <div class="wof-year-content">
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/cole-torode-canadian-2018.jpg" alt="Cole Torode Canadian Barista Champion WBC Finalist Amsterdam 2018" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">Canada Barista Champion · WBC Amsterdam Finalist</div>
-            <div class="name">Cole Torode</div>
-            <div class="place">Geisha &amp; Sidra · Rosso Coffee Roasters</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/tom-kuyken.jpg" alt="Tom Kuyken Norway Brewers Cup Champion 2018" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">Norway Brewers Cup Champion</div>
-            <div class="name">Tom Kuyken</div>
-            <div class="place">Geisha Natural · Kaffa</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/craig-simon.jpg" alt="Craig Simon Australia Barista Champion WBC Semi-finalist Amsterdam 2018" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">Australia Barista Champion · WBC Amsterdam Semi-finalist</div>
-            <div class="name">Craig Simon</div>
-            <div class="place">Geisha Natural · Veneziano Coffee Roasters</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/sebastian-brewers-stage.jpg" alt="Sebastián Villamizar Colombia at World Brewers Cup Belo Horizonte 2018" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">Colombia at World Brewers Cup · Belo Horizonte</div>
-            <div class="name">Sebastián Villamizar</div>
-            <div class="place">LPET coffee · La Palma &amp; El Tucán team</div>
-          </div>
-        </div>
+    <div class="wof-card">
+      <div class="wof-portrait" style="background:#222;"><img src="assets/heroes-brick-2nd-place.jpg" alt="Stefanos Paterakis Greece Barista Champion 2016" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2016</div>
+        <div class="name">Stefanos Paterakis</div>
+        <div class="achievement">Greece Barista Champion · WBC Dublin</div>
+        <div class="place"></div>
       </div>
-      <div class="wof-year-marker">2018</div>
-      <div class="wof-year-empty"></div>
     </div>
-
-    <!-- 2019 — biggest year -->
-    <div class="wof-year-block">
-      <div class="wof-year-empty"></div>
-      <div class="wof-year-marker">2019</div>
-      <div class="wof-year-content">
-        <div class="wof-champion-row">
-          <div class="wof-portrait" style="width:140px; height:140px;"><img src="assets/wof/jooyeon-jeon.jpg" alt="Jooyeon Jeon World Barista Champion 2019 Boston" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">★ World Barista Champion</div>
-            <div class="name">Jooyeon Jeon</div>
-            <div class="place">South Korea · Sidra Lactic · Momos Coffee</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/cole-wbc-podium.jpg" alt="Cole Torode WBC 2019 Boston Third Place" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">WBC Boston · 3rd Place</div>
-            <div class="name">Cole Torode</div>
-            <div class="place">Canada Barista Champion · Rosso Coffee Roasters</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/sam-spillman.jpg" alt="Samantha Spillman US Barista Champion 2019" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">★ US Barista Champion</div>
-            <div class="name">Samantha Spillman</div>
-            <div class="place">Carbonic Maceration / Lactic Gesha · Dillanos Coffee Roasters</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/onyx-champions.jpg" alt="Dylan Siemens US Barista Championship Finalist 2019 Onyx Coffee Lab" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">US Barista Championship · Finalist</div>
-            <div class="name">Dylan Siemens</div>
-            <div class="place">Lactic Gesha · <strong>Onyx Coffee Lab</strong></div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
+    <div class="wof-card">
+      <div class="wof-portrait" style="background:#222;"><img src="assets/hong-kong-2016.jpg" alt="Dane Oliver Denmark Brewers Cup Champion 2016" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2016</div>
+        <div class="name">Dane Oliver</div>
+        <div class="achievement">Denmark Brewers Cup Champion</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait" style="background:#222;"><img src="assets/wof/sam-neely.jpg" alt="Lise Marie Rømo Norway Barista Champion 2016" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2016</div>
+        <div class="name">Lise Marie Rømo</div>
+        <div class="achievement">Norway Barista Champion · WBC Dublin</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/onyx-champions.jpg" alt="Dylan Siemens US Brewers Cup Champion 2017 Onyx Coffee Lab" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2017</div>
+        <div class="name">Dylan Siemens</div>
+        <div class="achievement">US Brewers Cup Champion</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/onyx-champions.jpg" alt="Mark Michaelson US Roaster Champion 2017 Onyx Coffee Lab" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2017</div>
+        <div class="name">Mark Michaelson</div>
+        <div class="achievement">US Roaster Champion</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/wof/craig-simon.jpg" alt="Francesco Masciullo Italy Barista Champion WBC Finalist Seoul 2017" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2017</div>
+        <div class="name">Francesco Masciullo</div>
+        <div class="achievement">Italy Barista Champion · WBC Seoul Finalist</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/wof/cole-torode-canadian-2018.jpg" alt="Cole Torode Canadian Barista Champion WBC Finalist Amsterdam 2018" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2018</div>
+        <div class="name">Cole Torode</div>
+        <div class="achievement">Canada Barista Champion · WBC Amsterdam Finalist</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/wof/tom-kuyken.jpg" alt="Tom Kuyken Norway Brewers Cup Champion 2018" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2018</div>
+        <div class="name">Tom Kuyken</div>
+        <div class="achievement">Norway Brewers Cup Champion</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/wof/craig-simon.jpg" alt="Craig Simon Australia Barista Champion WBC Semi-finalist Amsterdam 2018" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2018</div>
+        <div class="name">Craig Simon</div>
+        <div class="achievement">Australia Barista Champion · WBC Amsterdam Semi-finalist</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/sebastian-brewers-stage.jpg" alt="Sebastián Villamizar Colombia at World Brewers Cup Belo Horizonte 2018" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2018</div>
+        <div class="name">Sebastián Villamizar</div>
+        <div class="achievement">Colombia at World Brewers Cup · Belo Horizonte</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait" style="width:140px; height:140px;"><img src="assets/wof/jooyeon-jeon.jpg" alt="Jooyeon Jeon World Barista Champion 2019 Boston" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2019</div>
+        <div class="name">Jooyeon Jeon</div>
+        <div class="achievement">★ World Barista Champion</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/cole-wbc-podium.jpg" alt="Cole Torode WBC 2019 Boston Third Place" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2019</div>
+        <div class="name">Cole Torode</div>
+        <div class="achievement">WBC Boston · 3rd Place</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/wof/sam-spillman.jpg" alt="Samantha Spillman US Barista Champion 2019" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2019</div>
+        <div class="name">Samantha Spillman</div>
+        <div class="achievement">★ US Barista Champion</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/onyx-champions.jpg" alt="Dylan Siemens US Barista Championship Finalist 2019 Onyx Coffee Lab" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2019</div>
+        <div class="name">Dylan Siemens</div>
+        <div class="achievement">US Barista Championship · Finalist</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
             <span style="color:var(--gold);font-family:var(--serif);font-size:24px;">TBF</span>
           </div>
-          <div class="wof-champion-info">
-            <div class="achievement">US Barista Championship · Finalist</div>
-            <div class="name">T. Ben Fischer</div>
-            <div class="place">LPET espresso course · Elixr Coffee Roasters / Glitter Cat</div>
-          </div>
-        </div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2019</div>
+        <div class="name">T. Ben Fischer</div>
+        <div class="achievement">US Barista Championship · Finalist</div>
+        <div class="place"></div>
       </div>
     </div>
-
-    <!-- 2020 -->
-    <div class="wof-year-block">
-      <div class="wof-year-content">
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/cole-torode-canadian-2018.jpg" alt="Cole Torode Canada Barista Championship Finalist 2020" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">Canada Barista Championship · Finalist</div>
-            <div class="name">Cole Torode</div>
-            <div class="place">Geisha · Swiss Water Decaf · Rosso Coffee Roasters</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/sam-neely.jpg" alt="Sam Neely US Barista Championship Finalist 2020 Amethyst Coffee" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">US Barista Championship · Finalist</div>
-            <div class="name">Sam Neely</div>
-            <div class="place">Geisha · Lactic Process · Amethyst Coffee</div>
-          </div>
-        </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/wof/cole-torode-canadian-2018.jpg" alt="Cole Torode Canada Barista Championship Finalist 2020" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2020</div>
+        <div class="name">Cole Torode</div>
+        <div class="achievement">Canada Barista Championship · Finalist</div>
+        <div class="place"></div>
       </div>
-      <div class="wof-year-marker">2020</div>
-      <div class="wof-year-empty"></div>
     </div>
-
-    <!-- 2022 — Elika Liftee -->
-    <div class="wof-year-block">
-      <div class="wof-year-empty"></div>
-      <div class="wof-year-marker">2022</div>
-      <div class="wof-year-content">
-        <div class="wof-champion-row">
-          <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/wof/sam-neely.jpg" alt="Sam Neely US Barista Championship Finalist 2020 Amethyst Coffee" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2020</div>
+        <div class="name">Sam Neely</div>
+        <div class="achievement">US Barista Championship · Finalist</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
             <span style="color:var(--gold);font-family:var(--serif);font-size:24px;">EL</span>
           </div>
-          <div class="wof-champion-info">
-            <div class="achievement">★ US Brewers Cup Champion · World 2nd · Melbourne</div>
-            <div class="name">Elika Liftee</div>
-            <div class="place">Gesha Natural · Competition pipeline &amp; prep</div>
-          </div>
-        </div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2022</div>
+        <div class="name">Elika Liftee</div>
+        <div class="achievement">★ US Brewers Cup Champion · World 2nd · Melbourne</div>
+        <div class="place"></div>
       </div>
     </div>
-
-    <!-- 2024 — Gray Kauffman training cycle -->
-    <div class="wof-year-block">
-      <div class="wof-year-content">
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/gray-kauffman-2025.jpg" alt="Gray Kauffman 2024 USBC qualification cycle training" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">USBC Qualification Cycle · Training</div>
-            <div class="name">Gray Kauffman</div>
-            <div class="place">Anaerobic Gesha · Pre-stage prep that led to 2025 Semi-finals</div>
-          </div>
-        </div>
-      </div>
-      <div class="wof-year-marker">2024</div>
-      <div class="wof-year-empty"></div>
-    </div>
-
-    <!-- ERA NOTE: 2021-2024 shift -->
-    <div class="wof-year-block" style="margin-bottom: 80px; opacity: 0.85;">
-      <div class="wof-year-empty"></div>
-      <div class="wof-year-marker" style="font-size: 18px; font-style: italic; color: #999; padding: 8px 16px;">2021 — 2024</div>
-      <div class="wof-year-content">
-        <div class="wof-champion-row">
-          <div class="wof-champion-info" style="max-width: 380px;">
-            <div class="achievement" style="color:#a8865a;">The training &amp; calibration era</div>
-            <div class="name" style="font-style: italic; font-size: 17px; line-height:1.4;">As elite competition evolved, sourcing moved from stage scripts to hidden infrastructure.</div>
-            <div class="place" style="margin-top:8px;">LPET coffees became calibration lots, training references, and sensory benchmarks for finalists at Onyx, Black &amp; White, and European programs — even when not declared on the official sheet.</div>
-          </div>
-        </div>
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/wof/gray-kauffman-2025.jpg" alt="Gray Kauffman 2024 USBC qualification cycle training" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2024</div>
+        <div class="name">Gray Kauffman</div>
+        <div class="achievement">USBC Qualification Cycle · Training</div>
+        <div class="place"></div>
       </div>
     </div>
-
-    <!-- 2025 -->
-    <div class="wof-year-block">
-      <div class="wof-year-content">
-        <div class="wof-champion-row">
-          <div class="wof-portrait"><img src="assets/wof/gray-kauffman-2025.jpg" alt="Gray Kauffman US Barista Championship Semi-finalist 2025" /></div>
-          <div class="wof-champion-info">
-            <div class="achievement">US Barista Championship · Semi-finalist</div>
-            <div class="name">Gray Kauffman</div>
-            <div class="place">Geisha · Anaerobic · Independent</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
+    <div class="wof-card">
+      <div class="wof-portrait"><img src="assets/wof/gray-kauffman-2025.jpg" alt="Gray Kauffman US Barista Championship Semi-finalist 2025" /></div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2025</div>
+        <div class="name">Gray Kauffman</div>
+        <div class="achievement">US Barista Championship · Semi-finalist</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
             <span style="color:var(--gold);font-family:var(--serif);font-size:32px;">SA</span>
           </div>
-          <div class="wof-champion-info">
-            <div class="achievement">KZN Regional Barista Championship · 1st</div>
-            <div class="name">Fanie Botes</div>
-            <div class="place">South Africa · Pink Bourbon Bio-Washed · Bluebird Coffee Roastery</div>
-          </div>
-        </div>
-        <div class="wof-champion-row">
-          <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
+      <div class="wof-card-info">
+        <div class="wof-card-year">2025</div>
+        <div class="name">Fanie Botes</div>
+        <div class="achievement">KZN Regional Barista Championship · 1st</div>
+        <div class="place"></div>
+      </div>
+    </div>
+    <div class="wof-card">
+      <div class="wof-portrait" style="background:linear-gradient(135deg,#1a1a1a,#444); display:flex;align-items:center;justify-content:center;">
             <span style="color:var(--gold);font-family:var(--serif);font-size:32px;">SA</span>
           </div>
-          <div class="wof-champion-info">
-            <div class="achievement">KZN Regional Barista Championship · 2nd</div>
-            <div class="name">Luhle Mnyanda</div>
-            <div class="place">South Africa · Pink Bourbon Bio-Washed · Bluebird Coffee Roastery</div>
-          </div>
-        </div>
+      <div class="wof-card-info">
+        <div class="wof-card-year">2025</div>
+        <div class="name">Luhle Mnyanda</div>
+        <div class="achievement">KZN Regional Barista Championship · 2nd</div>
+        <div class="place"></div>
       </div>
-      <div class="wof-year-marker">2025</div>
-      <div class="wof-year-empty"></div>
     </div>
-
   </div>
 
   <div class="wof-footer" style="max-width: 1100px; margin: 0 auto;">
