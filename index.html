@@ -569,6 +569,45 @@
     font-style: italic;
   }
 
+
+  /* ---- Video: paste a link or upload the file ---- */
+  .vid-tabs { display: flex; gap: 0; margin-bottom: 14px; }
+  .vid-tab {
+    flex: 1; padding: 11px 14px; cursor: pointer;
+    font-family: inherit; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--line-soft); border-right: none;
+    transition: background .2s, color .2s;
+  }
+  .vid-tab:last-child { border-right: 1px solid var(--line-soft); }
+  .vid-tab.is-active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .vid-pane.is-hidden { display: none; }
+
+  .vid-check { margin-top: 8px; font-size: 13px; min-height: 20px; }
+  .vid-check.ok   { color: #1a7f4b; }
+  .vid-check.bad  { color: var(--accent-deep); }
+  .vid-check.busy { color: #6a6a6a; }
+
+  .vid-drop {
+    border: 1px dashed var(--line-soft); border-radius: var(--radius);
+    padding: 26px 18px; text-align: center; cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .vid-drop:hover, .vid-drop.is-over { border-color: var(--accent); background: rgba(196,30,92,0.03); }
+  .vid-drop input[type="file"] { display: none; }
+  .vid-drop-title { font-size: 14px; margin-bottom: 4px; }
+  .vid-drop-hint  { font-size: 12px; color: #6a6a6a; }
+
+  .vid-progress {
+    height: 6px; background: var(--line); border-radius: 100px;
+    overflow: hidden; margin-top: 12px; display: none;
+  }
+  .vid-progress.is-on { display: block; }
+  .vid-bar { height: 100%; width: 0%; background: var(--accent); transition: width .2s ease; }
+  .vid-status { margin-top: 8px; font-size: 13px; min-height: 20px; }
+  .vid-status.ok  { color: #1a7f4b; }
+  .vid-status.bad { color: var(--accent-deep); }
+
   /* ---- Interactive timeline — same design as "Our Story" on Shopify ---- */
   .wof-grid {
     position: relative;
@@ -1632,76 +1671,33 @@
             <span class="help">Be straight with us. BEAT is for independents and small businesses. If a large roaster or group is already funding your campaign, this round isn't the one for you.</span>
           </div>
         </div>
-
-        <!-- Video URL -->
+        <!-- Video: link or upload -->
         <div class="form-row single">
           <div class="form-field">
-            <label for="video_url">Video link (YouTube, Vimeo or Drive) <span class="req">*</span></label>
-            <input type="url" id="video_url" name="video_url" required placeholder="https://..." />
-            <span class="help">2 to 2.5 minutes. Make sure the link is unlisted or public — not private.</span>
+            <label>Your video <span class="req">*</span></label>
+
+            <div class="vid-tabs" role="tablist">
+              <button type="button" class="vid-tab is-active" data-vid-mode="link" role="tab" aria-selected="true">Paste a link</button>
+              <button type="button" class="vid-tab" data-vid-mode="upload" role="tab" aria-selected="false">Upload the file</button>
+            </div>
+
+            <div class="vid-pane" data-vid-pane="link">
+              <input type="url" id="video_url" name="video_url" placeholder="https://youtube.com/..." />
+              <span class="help">YouTube, Vimeo or Drive. 2 to 2.5 minutes. We check the link before you send it — make sure it is public or unlisted, never private.</span>
+              <div class="vid-check" data-vid-check aria-live="polite"></div>
+            </div>
+
+            <div class="vid-pane is-hidden" data-vid-pane="upload">
+              <label class="vid-drop" data-vid-drop>
+                <input type="file" id="video_file" accept="video/mp4,video/quicktime,video/x-msvideo,video/x-matroska,video/webm" />
+                <div class="vid-drop-title" data-vid-drop-title>Choose a file or drop it here</div>
+                <div class="vid-drop-hint">MP4, MOV, AVI, MKV or WebM &middot; up to 200&nbsp;MB</div>
+              </label>
+              <div class="vid-progress" data-vid-progress><div class="vid-bar" data-vid-bar></div></div>
+              <div class="vid-status" data-vid-status aria-live="polite"></div>
+            </div>
           </div>
         </div>
-
-        <!-- Pitch -->
-        <div class="form-row single">
-          <div class="form-field">
-            <label for="pitch_text">Why BEAT, in your own words <span class="req">*</span></label>
-            <textarea id="pitch_text" name="pitch_text" required minlength="50" maxlength="800" placeholder="What does this craft mean to you? What competition are you preparing for, and why does this coffee fit?"></textarea>
-            <span class="char-count"><span id="pitchCount">0</span> / 800</span>
-          </div>
-        </div>
-
-        <!-- Pro context -->
-        <div class="form-row">
-          <div class="form-field">
-            <label for="current_roastery">Current roastery / cafe</label>
-            <input type="text" id="current_roastery" name="current_roastery" maxlength="120" />
-          </div>
-          <div class="form-field">
-            <label for="past_competitions">Past competitions</label>
-            <input type="text" id="past_competitions" name="past_competitions" maxlength="200" placeholder="e.g. National Barista 2024 (3rd)" />
-          </div>
-        </div>
-
-        <!-- Consent -->
-        <div class="consent-row">
-          <label>
-            <input type="checkbox" id="consent_data" name="consent_data" required />
-            <span>I authorize La Palma &amp; El Tucán to store this submission for the BEAT 2026 contest selection process. <span class="req">*</span></span>
-          </label>
-          <label>
-            <input type="checkbox" id="consent_amplify" name="consent_amplify" />
-            <span>(Optional) I'm happy for LP&amp;ET to share my video on their channels with credit, regardless of contest outcome.</span>
-          </label>
-          <label>
-            <input type="checkbox" id="consent_content" name="consent_content" />
-            <span>(Optional, applies only if I'm selected) I'm happy to share photos, clips and stories from my training and my competition, and for LP&amp;ET to post them with credit to me.</span>
-          </label>
-        </div>
-
-        <!-- Submit -->
-        <div class="form-submit-row">
-          <small>
-            Applications close <strong>August 31, 2026</strong>. Locked once submitted.<br/>
-            <span style="opacity: 0.75;">For championships between Aug 2026 and Jul 31, 2027. Freight and duties paid by recipient (we handle export &amp; carrier).</span>
-          </small>
-          <button type="submit" class="form-submit" id="submitBtn">Send application</button>
-        </div>
-
-        <div class="form-message error" id="errorMsg"></div>
-      </form>
-    </div>
-
-    <!-- SUCCESS STATE -->
-    <div class="form-success-state" id="successState">
-      <div class="success-mark">✓</div>
-      <h3>Application received.</h3>
-      <p>You'll hear from the BEAT jury within 14 days at the email you provided. In the meantime, follow <strong>@lapalmayeltucan</strong> for updates and the public voting round.</p>
-      <p style="margin-top: 20px; font-size: 13px; opacity: 0.7;">— <em>Felipe &amp; the LP&amp;ET team</em></p>
-    </div>
-
-  </div>
-</div>
 
 <!-- ============================================================ -->
 <!-- SUPABASE CLIENT (CDN) -->
@@ -1836,9 +1832,18 @@
     if (!targetComp) { showError('Please tell us which championship you\'re preparing for, and roughly when.'); return; }
     if (!nationalReg) { showError('Please tell us how many times you have competed at national level.'); return; }
     if (!sponsorStatus) { showError('Please tell us who covers your competition costs today.'); return; }
-    if (!/^https?:\/\/[^\s]+\.[^\s]+/.test(videoUrl)) {
-      showError('Please paste a real video URL (e.g. https://youtube.com/...). Make sure it includes a domain.');
-      return;
+    if (BEAT_VIDEO.mode === 'upload') {
+      if (BEAT_VIDEO.uploading) { showError('Your video is still uploading — give it a moment.'); return; }
+      if (!BEAT_VIDEO.uploadedPath) { showError('Please upload your video file, or switch to "Paste a link".'); return; }
+    } else {
+      if (!/^https?:\/\/[^\s]+\.[^\s]+/.test(videoUrl)) {
+        showError('Please paste a real video URL (e.g. https://youtube.com/...). Make sure it includes a domain.');
+        return;
+      }
+      if (BEAT_VIDEO.linkOk === false) {
+        showError('We could not open that video. Fix the link, or upload the file instead.');
+        return;
+      }
     }
     if (pitch.length < 50) {
       showError('Your pitch needs at least 50 characters. Tell us why this craft matters to you (' + pitch.length + ' / 50 so far).');
@@ -1863,7 +1868,8 @@
       target_competition: targetComp,
       national_registration: nationalReg || null,
       sponsor_status: sponsorStatus || null,
-      video_url: videoUrl,
+      video_url: BEAT_VIDEO.mode === 'upload' ? BEAT_VIDEO.uploadedPath : videoUrl,
+      video_source: BEAT_VIDEO.mode,
       pitch_text: pitch,
       current_roastery: nullable(document.getElementById('current_roastery').value),
       past_competitions: nullable(document.getElementById('past_competitions').value),
@@ -1932,6 +1938,153 @@
     }, { passive: true });
     window.addEventListener('resize', update);
     update();
+  }
+})();
+
+
+/* ---- Video field: paste a link (checked) or upload to Supabase Storage ---- */
+var BEAT_VIDEO = { mode: 'link', linkOk: false, uploadedPath: null, uploading: false };
+
+(function () {
+  var tabs   = document.querySelectorAll('[data-vid-mode]');
+  var panes  = document.querySelectorAll('[data-vid-pane]');
+  var urlEl  = document.getElementById('video_url');
+  var fileEl = document.getElementById('video_file');
+  var check  = document.querySelector('[data-vid-check]');
+  var drop   = document.querySelector('[data-vid-drop]');
+  var dropT  = document.querySelector('[data-vid-drop-title]');
+  var progW  = document.querySelector('[data-vid-progress]');
+  var bar    = document.querySelector('[data-vid-bar]');
+  var status = document.querySelector('[data-vid-status]');
+  if (!urlEl || !fileEl) return;
+
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      BEAT_VIDEO.mode = t.dataset.vidMode;
+      tabs.forEach(function (x) {
+        var on = x === t;
+        x.classList.toggle('is-active', on);
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      panes.forEach(function (p) {
+        p.classList.toggle('is-hidden', p.dataset.vidPane !== BEAT_VIDEO.mode);
+      });
+    });
+  });
+
+  /* --- link checking ------------------------------------------------ */
+  function say(el, msg, cls) { el.textContent = msg; el.className = el.className.split(' ')[0] + (cls ? ' ' + cls : ''); }
+
+  var timer = null;
+  urlEl.addEventListener('input', function () {
+    BEAT_VIDEO.linkOk = false;
+    clearTimeout(timer);
+    var v = urlEl.value.trim();
+    if (!v) { say(check, '', ''); return; }
+    timer = setTimeout(function () { checkLink(v); }, 600);
+  });
+
+  function checkLink(url) {
+    if (!/^https?:\/\/[^\s]+\.[^\s]+/.test(url)) {
+      say(check, 'That does not look like a full URL yet.', 'bad'); return;
+    }
+    var yt = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)/i.test(url);
+    var vm = /vimeo\.com\//i.test(url);
+    var gd = /drive\.google\.com|docs\.google\.com/i.test(url);
+
+    if (gd) {
+      say(check, 'Drive link received. Please confirm sharing is set to "anyone with the link" — we cannot check that from here.', 'busy');
+      BEAT_VIDEO.linkOk = true; return;
+    }
+    if (!yt && !vm) {
+      say(check, 'Link accepted. We could not verify this host automatically, so please double-check it opens in a private window.', 'busy');
+      BEAT_VIDEO.linkOk = true; return;
+    }
+
+    say(check, 'Checking the link…', 'busy');
+    var api = yt
+      ? 'https://www.youtube.com/oembed?format=json&url=' + encodeURIComponent(url)
+      : 'https://vimeo.com/api/oembed.json?url=' + encodeURIComponent(url);
+
+    fetch(api)
+      .then(function (r) {
+        if (r.ok) return r.json();
+        throw new Error(r.status === 401 || r.status === 403 ? 'private' : 'missing');
+      })
+      .then(function (d) {
+        BEAT_VIDEO.linkOk = true;
+        say(check, '\u2713 Found: "' + (d.title || 'your video') + '"' + (d.author_name ? ' \u2014 ' + d.author_name : ''), 'ok');
+      })
+      .catch(function (e) {
+        if (e && e.message === 'private') {
+          BEAT_VIDEO.linkOk = false;
+          say(check, 'That video is private. Set it to unlisted or public, otherwise the jury cannot watch it.', 'bad');
+        } else if (e && e.message === 'missing') {
+          BEAT_VIDEO.linkOk = false;
+          say(check, 'We could not find a video at that link. Check for a typo.', 'bad');
+        } else {
+          BEAT_VIDEO.linkOk = true;
+          say(check, 'Could not reach the video host to verify. Your link will be sent as is.', 'busy');
+        }
+      });
+  }
+
+  /* --- upload ------------------------------------------------------- */
+  var MAX = 209715200; // 200 MB, same ceiling as the bucket
+
+  ['dragenter','dragover'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('is-over'); });
+  });
+  ['dragleave','drop'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('is-over'); });
+  });
+  drop.addEventListener('drop', function (e) {
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) { fileEl.files = e.dataTransfer.files; upload(e.dataTransfer.files[0]); }
+  });
+  fileEl.addEventListener('change', function () { if (fileEl.files[0]) upload(fileEl.files[0]); });
+
+  function upload(file) {
+    BEAT_VIDEO.uploadedPath = null;
+    if (file.size > MAX) {
+      say(status, 'That file is ' + (file.size / 1048576).toFixed(0) + ' MB. The limit is 200 MB — export it smaller, or paste a link instead.', 'bad');
+      return;
+    }
+    dropT.textContent = file.name;
+    progW.classList.add('is-on');
+    bar.style.width = '0%';
+    say(status, 'Uploading…', 'busy');
+    BEAT_VIDEO.uploading = true;
+
+    var ext = (file.name.split('.').pop() || 'mp4').toLowerCase().replace(/[^a-z0-9]/g, '');
+    var path = 'submissions/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', SUPABASE_URL + '/storage/v1/object/beat-videos/' + path, true);
+    xhr.setRequestHeader('apikey', SUPABASE_ANON_KEY);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + SUPABASE_ANON_KEY);
+    xhr.setRequestHeader('Content-Type', file.type || 'video/mp4');
+    xhr.setRequestHeader('x-upsert', 'false');
+
+    xhr.upload.onprogress = function (e) {
+      if (e.lengthComputable) bar.style.width = ((e.loaded / e.total) * 100).toFixed(1) + '%';
+    };
+    xhr.onload = function () {
+      BEAT_VIDEO.uploading = false;
+      if (xhr.status >= 200 && xhr.status < 300) {
+        BEAT_VIDEO.uploadedPath = 'beat-videos/' + path;
+        bar.style.width = '100%';
+        say(status, '\u2713 Uploaded. You can send your application now.', 'ok');
+      } else {
+        bar.style.width = '0%';
+        say(status, 'Upload failed (' + xhr.status + '). Try again, or paste a link instead.', 'bad');
+      }
+    };
+    xhr.onerror = function () {
+      BEAT_VIDEO.uploading = false;
+      bar.style.width = '0%';
+      say(status, 'Upload failed — check your connection, or paste a link instead.', 'bad');
+    };
+    xhr.send(file);
   }
 })();
 
